@@ -8,5 +8,6 @@
     <string name="Close">Schließen</string>
     <string name="Open">Öffnen</string>
     <string name="all_images">Alle Bilder</string>
-    <string name="favourite_images">Favoriten</string>
+    <string name="favorite_images">Favoriten</string>
+    <string name="no_favorites">Keine Favoriten vorhanden</string>
 </resources>

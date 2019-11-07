@@ -8,5 +8,6 @@
     <string name="Open">Open</string>
     <string name="Close">Close</string>
     <string name="all_images">All Images</string>
-    <string name="favourite_images">Favourites</string>
+    <string name="favorite_images">Favorites</string>
+    <string name="no_favorites">No favorites available</string>
 </resources>

@@ -8,14 +8,23 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="8dp"
-        android:text="@string/favourite_images"
+        android:text="@string/favorite_images"
         android:textSize="26sp" />
 
     <de.sharknoon.placepixelhobby.utils.StatefulRecyclerView
-        android:id="@+id/rvFavouriteSubimages"
+        android:id="@+id/rvFavoriteSubimages"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal" />
+
+    <TextView
+        android:id="@+id/textViewNoFavorites"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="@string/no_favorites"
+        android:textSize="20sp"
+        android:visibility="visible" />
 
     <TextView
         android:layout_width="match_parent"

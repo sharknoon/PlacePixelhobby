@@ -16,7 +16,7 @@ class SubimageAdapter(context: Context, private val data: MutableList<Subimage>)
 
     private val inflater = LayoutInflater.from(context)
     private var subimageClickListener: (view: View, item: Subimage) -> Unit = { _, _ -> }
-    private var favouriteClickListener: (view: View, item: Subimage) -> Unit = { _, _ -> }
+    private var favoriteClickListener: (view: View, item: Subimage) -> Unit = { _, _ -> }
 
     // inflates the row layout from xml when needed
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SubimageViewHolder {
@@ -47,7 +47,7 @@ class SubimageAdapter(context: Context, private val data: MutableList<Subimage>)
             itemView.findViewById<TextView>(R.id.recyclerViewItemTextView)
         internal var imageViewSubimage =
             itemView.findViewById<ImageView>(R.id.recyclerViewItemImageView)
-        internal val buttonFavourite =
+        internal val buttonFavorite =
             itemView.findViewById<Button>(R.id.recyclerViewItemButton)
 
         init {
@@ -55,8 +55,8 @@ class SubimageAdapter(context: Context, private val data: MutableList<Subimage>)
                 subimageClickListener(it, getItem(adapterPosition))
             }
 
-            buttonFavourite?.setOnClickListener {
-                favouriteClickListener(it, getItem(adapterPosition))
+            buttonFavorite?.setOnClickListener {
+                favoriteClickListener(it, getItem(adapterPosition))
             }
         }
 
@@ -90,8 +90,8 @@ class SubimageAdapter(context: Context, private val data: MutableList<Subimage>)
         this.subimageClickListener = subimageClickListener
     }
 
-    fun setFavouriteClickListener(favouriteClickListener: (view: View, item: Subimage) -> Unit) {
-        this.favouriteClickListener = favouriteClickListener
+    fun setFavoriteClickListener(favoriteClickListener: (view: View, item: Subimage) -> Unit) {
+        this.favoriteClickListener = favoriteClickListener
     }
 
 }

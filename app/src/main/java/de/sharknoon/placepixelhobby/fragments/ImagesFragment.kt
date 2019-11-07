@@ -11,6 +11,7 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import de.sharknoon.placepixelhobby.R
 import de.sharknoon.placepixelhobby.SubimageAdapter
 import de.sharknoon.placepixelhobby.activities.ImageActivity
@@ -32,26 +33,26 @@ class ImagesFragment : Fragment() {
     override fun onStart() {
         super.onStart()
         initSharedPreferences()
-        initFavouriteImagesRecyclerView()
+        initFavoriteImagesRecyclerView()
         initAllImagesRecyclerView()
     }
 
-    private var favouriteImagePrefs: SharedPreferences? = null
+    private var favoriteImagePrefs: SharedPreferences? = null
+    private var favoriteImageRVAdapter: SubimageAdapter? = null
 
     private fun initSharedPreferences() {
-        favouriteImagePrefs = this.activity?.getSharedPreferences(
-            "subimage_favourites",
+        favoriteImagePrefs = this.activity?.getSharedPreferences(
+            "subimage_favorites",
             Context.MODE_PRIVATE
         )
     }
 
-    private fun initFavouriteImagesRecyclerView() {
+    private fun initFavoriteImagesRecyclerView() {
         val view = view ?: return
-        val favouriteImagePrefs = favouriteImagePrefs ?: return
 
-        val subImages = getFavouriteImages()
+        val subImages = getFavoriteImages()
 
-        val recyclerView = view.findViewById<RecyclerView>(R.id.rvFavouriteSubimages)
+        val recyclerView = view.findViewById<RecyclerView>(R.id.rvFavoriteSubimages)
         recyclerView?.layoutManager =
             LinearLayoutManager(view.context, LinearLayoutManager.HORIZONTAL, false)
         val adapter = SubimageAdapter(view.context, subImages)
@@ -59,30 +60,14 @@ class ImagesFragment : Fragment() {
             openImageActivity("${subimage.name}_detailed")
         }
 
-        adapter.setFavouriteClickListener { _, subimage ->
-            toggleImageFavourite(subimage)
+        adapter.setFavoriteClickListener { _, subimage ->
+            toggleImageFavorite(subimage)
         }
 
         recyclerView?.adapter = adapter
+        favoriteImageRVAdapter = adapter
 
-        //Don't question it, I need to store a instance of the listener
-        val listener = { sharedPreferences: SharedPreferences, key: String ->
-            when {
-                //added or changed
-                sharedPreferences.contains(key) -> {
-                    adapter.addItem(
-                        Subimage.fromID(requireContext(), key.toIntOrNull() ?: -1)
-                    )
-                }
-                //removed
-                !sharedPreferences.contains(key) -> {
-                    adapter.remoteItem(
-                        Subimage.fromID(requireContext(), key.toIntOrNull() ?: -1)
-                    )
-                }
-            }
-        }
-        favouriteImagePrefs.registerOnSharedPreferenceChangeListener(listener)
+        updateTextViewFavorites()
     }
 
     private fun initAllImagesRecyclerView() {
@@ -98,8 +83,8 @@ class ImagesFragment : Fragment() {
             openImageActivity("${subimage.name}_detailed")
         }
 
-        adapter.setFavouriteClickListener { _, subimage ->
-            toggleImageFavourite(subimage)
+        adapter.setFavoriteClickListener { _, subimage ->
+            toggleImageFavorite(subimage)
         }
         recyclerView?.adapter = adapter
     }
@@ -110,18 +95,45 @@ class ImagesFragment : Fragment() {
         view?.context?.startActivity(myIntent)
     }
 
-    private fun toggleImageFavourite(item: Subimage) {
-        val prefs = favouriteImagePrefs ?: return
+    private fun toggleImageFavorite(item: Subimage) {
+        val prefs = favoriteImagePrefs ?: return
 
+        //Checking for turning off or on the favorite
+        //Turning on
         if (prefs.contains(item.id.toString())) {
+            //Remove it from the shared prefs
             prefs.edit().remove(item.id.toString()).apply()
+            //Update the Recyclerview
+            favoriteImageRVAdapter?.remoteItem(
+                Subimage.fromID(requireContext(), item.id)
+            )
+            //Turning off
         } else {
+            //Add it to the shared prefs
             prefs.edit().putString(item.id.toString(), item.name).apply()
+            //Update the Recyclerview
+            favoriteImageRVAdapter?.addItem(
+                Subimage.fromID(requireContext(), item.id)
+            )
+        }
+
+        updateTextViewFavorites()
+    }
+
+    private fun updateTextViewFavorites() {
+        val prefs = favoriteImagePrefs ?: return
+
+        //If the favorites-list is empty, show a text field
+        val textView = requireActivity().findViewById<TextView>(R.id.textViewNoFavorites)
+        textView.visibility = if (prefs.all.isEmpty()) {
+            View.VISIBLE
+        } else {
+            View.GONE
         }
     }
 
-    private fun getFavouriteImages(): MutableList<Subimage> {
-        val prefs = favouriteImagePrefs ?: return mutableListOf()
+    private fun getFavoriteImages(): MutableList<Subimage> {
+        val prefs = favoriteImagePrefs ?: return mutableListOf()
 
         return prefs
             .all
