@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Place Pixelhobby</string>
+    <string name="count_colors">Count Colors</string>
+    <string name="view_canvas">View Canvas</string>
+    <string name="images">Images</string>
+    <string name="history">History</string>
+    <string name="count_pixels">Count Pixels</string>
+    <string name="Open">Open</string>
+    <string name="Close">Close</string>
+    <string name="all_images">All Images</string>
+    <string name="favourite_images">Favourites</string>
+</resources>

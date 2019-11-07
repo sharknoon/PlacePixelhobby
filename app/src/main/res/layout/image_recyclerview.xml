@@ -1,0 +1,33 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="60dp"
+    android:layout_margin="8dp">
+
+    <Button
+        android:id="@+id/recyclerViewItemButton"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:background="@drawable/ic_star_empty" />
+
+    <ImageView
+        android:id="@+id/recyclerViewItemImageView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerInParent="true"
+        android:adjustViewBounds="true"
+        android:contentDescription="@string/images" />
+
+    <TextView
+        android:id="@+id/recyclerViewItemTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@color/colorWhiteTransparent"
+        android:paddingStart="5dp"
+        android:paddingEnd="0dp"
+        android:textColor="@color/colorBlack"
+        tools:text="This is some temp text" />
+</RelativeLayout>

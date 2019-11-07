@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Place Pixelhobby</string>
+    <string name="count_colors">Farben zählen</string>
+    <string name="view_canvas">Bild ansehen</string>
+    <string name="images">Bilder</string>
+    <string name="history">Entstehung</string>
+    <string name="count_pixels">Pixel zählen</string>
+    <string name="Close">Schließen</string>
+    <string name="Open">Öffnen</string>
+    <string name="all_images">Alle Bilder</string>
+    <string name="favourite_images">Favoriten</string>
+</resources>
