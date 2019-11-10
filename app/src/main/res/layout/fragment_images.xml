@@ -7,34 +7,34 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="8dp"
+        android:padding="@dimen/layout_distance_medium"
         android:text="@string/favorite_images"
-        android:textSize="26sp" />
+        android:textSize="@dimen/text_size_medium" />
 
     <de.sharknoon.placepixelhobby.utils.StatefulRecyclerView
-        android:id="@+id/rvFavoriteSubimages"
+        android:id="@+id/recycler_view_fragment_images_favorite_subimages"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal" />
 
     <TextView
-        android:id="@+id/textViewNoFavorites"
+        android:id="@+id/text_view_fragment_images_no_favourites"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
         android:text="@string/no_favorites"
-        android:textSize="20sp"
+        android:textSize="@dimen/text_size_small"
         android:visibility="visible" />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="8dp"
+        android:padding="@dimen/layout_distance_medium"
         android:text="@string/all_images"
-        android:textSize="26sp" />
+        android:textSize="@dimen/text_size_medium" />
 
     <de.sharknoon.placepixelhobby.utils.StatefulRecyclerView
-        android:id="@+id/rvAllSubimages"
+        android:id="@+id/recycler_view_fragment_images_all_subimages"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 

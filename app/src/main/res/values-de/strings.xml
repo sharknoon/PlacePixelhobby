@@ -10,4 +10,8 @@
     <string name="all_images">Alle Bilder</string>
     <string name="favorite_images">Favoriten</string>
     <string name="no_favorites">Keine Favoriten vorhanden</string>
+    <string name="x_images_selected_singular">%1$d Bild ausgewählt</string>
+    <string name="next">Weiter</string>
+    <string name="selected">Ausgewählt</string>
+    <string name="x_images_selected_plural">%1$d Bilder ausgewählt</string>
 </resources>

@@ -9,28 +9,32 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import de.sharknoon.placepixelhobby.model.Subimage
+import de.sharknoon.placepixelhobby.model.SubimageExtensions.favorite
 
-class SubimageAdapter(context: Context, private val data: MutableList<Subimage>) :
-    RecyclerView.Adapter<SubimageAdapter.SubimageViewHolder>() {
+open class SubimageFavoriteAdapter(context: Context, private val data: MutableList<Subimage>) :
+    RecyclerView.Adapter<SubimageFavoriteAdapter.SubimageFavoriteViewHolder>() {
 
 
     private val inflater = LayoutInflater.from(context)
     private var subimageClickListener: (view: View, item: Subimage) -> Unit = { _, _ -> }
-    private var favoriteClickListener: (view: View, item: Subimage) -> Unit = { _, _ -> }
+    private var favoriteClickListener: (button: Button, item: Subimage) -> Unit = { _, _ -> }
 
     // inflates the row layout from xml when needed
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SubimageViewHolder {
-        val view = inflater.inflate(R.layout.image_recyclerview, parent, false)
-        return SubimageViewHolder(view)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SubimageFavoriteViewHolder {
+        val view = inflater.inflate(R.layout.view_holder_image_favorite, parent, false)
+        return SubimageFavoriteViewHolder(view)
     }
 
     // binds the data to the TextView in each row
-    override fun onBindViewHolder(holder: SubimageViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: SubimageFavoriteViewHolder, position: Int) {
         val subimage = data[position]
         val subtext = "${subimage.number} (${subimage.x}|${subimage.y})"
+        val subfavorite = if (subimage.favorite) R.drawable.ic_star else R.drawable.ic_star_empty
         holder.textViewSubimageName.text = subtext
         holder.imageViewSubimage.setImageDrawable(subimage.image)
+        holder.buttonFavorite.setBackgroundResource(subfavorite)
     }
+
 
     /**
      * Returns the total amount of items
@@ -41,14 +45,14 @@ class SubimageAdapter(context: Context, private val data: MutableList<Subimage>)
 
 
     // stores and recycles views as they are scrolled off screen
-    inner class SubimageViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    inner class SubimageFavoriteViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         internal var textViewSubimageName =
-            itemView.findViewById<TextView>(R.id.recyclerViewItemTextView)
+            itemView.findViewById<TextView>(R.id.text_view_view_holder_image_favorite)
         internal var imageViewSubimage =
-            itemView.findViewById<ImageView>(R.id.recyclerViewItemImageView)
+            itemView.findViewById<ImageView>(R.id.image_view_view_holder_image_favorite)
         internal val buttonFavorite =
-            itemView.findViewById<Button>(R.id.recyclerViewItemButton)
+            itemView.findViewById<Button>(R.id.button_view_holder_image_favorite)
 
         init {
             itemView.setOnClickListener {
@@ -56,7 +60,7 @@ class SubimageAdapter(context: Context, private val data: MutableList<Subimage>)
             }
 
             buttonFavorite?.setOnClickListener {
-                favoriteClickListener(it, getItem(adapterPosition))
+                favoriteClickListener(buttonFavorite, getItem(adapterPosition))
             }
         }
 
@@ -79,10 +83,22 @@ class SubimageAdapter(context: Context, private val data: MutableList<Subimage>)
         notifyItemInserted(position)
     }
 
-    fun remoteItem(subimage: Subimage) {
+    fun removeItem(subimage: Subimage) {
         val index = data.indexOf(subimage)
         data.removeAt(index)
         notifyItemRemoved(index)
+    }
+
+    fun setFavorite(subimage: Subimage) {
+        val index = data.indexOf(subimage)
+        data[index].favorite = true
+        notifyItemChanged(index)
+    }
+
+    fun removeFavorite(subimage: Subimage) {
+        val index = data.indexOf(subimage)
+        data[index].favorite = false
+        notifyItemChanged(index)
     }
 
     // allows clicks events to be caught
@@ -90,7 +106,7 @@ class SubimageAdapter(context: Context, private val data: MutableList<Subimage>)
         this.subimageClickListener = subimageClickListener
     }
 
-    fun setFavoriteClickListener(favoriteClickListener: (view: View, item: Subimage) -> Unit) {
+    fun setFavoriteClickListener(favoriteClickListener: (button: Button, item: Subimage) -> Unit) {
         this.favoriteClickListener = favoriteClickListener
     }
 

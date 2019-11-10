@@ -1,13 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context=".fragments.CountColorsFragment">
 
-    <TextView
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center_vertical|center_horizontal"
-        android:text="Farben zählen kommt bald" />
+        android:layout_height="wrap_content"
+        android:layout_above="@id/linear_layout_fragment_counter_bottom_bar">
 
-</LinearLayout>
+        <FrameLayout
+            android:id="@+id/view_fragment_counter_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </FrameLayout>
+
+
+    <LinearLayout
+        android:id="@+id/linear_layout_fragment_counter_bottom_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@color/colorPrimary">
+
+        <TextView
+            android:id="@+id/text_view_fragment_counter_amount_selected_images"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/layout_distance_small"
+            android:text="@string/x_images_selected_singular"
+            android:textColor="@color/colorWhite"
+            android:textSize="@dimen/text_size_small" />
+
+        <!-- Spacer -->
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <Button
+            android:id="@+id/button_fragment_counter_next"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/next" />
+    </LinearLayout>
+
+</RelativeLayout>

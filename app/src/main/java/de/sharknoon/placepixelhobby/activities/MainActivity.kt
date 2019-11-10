@@ -9,7 +9,7 @@ import android.support.v7.app.AppCompatActivity
 import android.view.MenuItem
 import android.widget.Toast
 import de.sharknoon.placepixelhobby.R
-import de.sharknoon.placepixelhobby.fragments.CounterFragment
+import de.sharknoon.placepixelhobby.fragments.CountColorsFragment
 import de.sharknoon.placepixelhobby.fragments.HistoryFragment
 import de.sharknoon.placepixelhobby.fragments.ImagesFragment
 import kotlinx.android.synthetic.main.activity_main.*
@@ -33,18 +33,18 @@ class MainActivity : AppCompatActivity() {
         bottom_navigation.setOnNavigationItemSelectedListener { item ->
             return@setOnNavigationItemSelectedListener when (item.itemId) {
                 R.id.navigation_images -> {
-                    title = "${getString(R.string.app_name)} - ${getString(R.string.images)}"
+                    //title = "${getString(R.string.app_name)} - ${getString(R.string.images)}"
                     openFragment(ImagesFragment.getInstance())
                     true
                 }
                 R.id.navigation_history -> {
-                    title = "${getString(R.string.app_name)} - ${getString(R.string.history)}"
+                    //title = "${getString(R.string.app_name)} - ${getString(R.string.history)}"
                     openFragment(HistoryFragment.getInstance())
                     true
                 }
                 R.id.navigation_counter -> {
-                    title = "${getString(R.string.app_name)} - ${getString(R.string.count_colors)}"
-                    openFragment(CounterFragment.getInstance())
+                    //title = "${getString(R.string.app_name)} - ${getString(R.string.count_colors)}"
+                    openFragment(CountColorsFragment.getInstance())
                     true
                 }
                 else -> false
