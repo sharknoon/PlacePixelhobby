@@ -7,4 +7,38 @@
     <color name="colorWhiteTransparent">#A6FFFFFF</color>
     <color name="colorBlack">#000000</color>
     <color name="colorTransparent">#00000000</color>
+
+    <color name="placeWhite">#ffffff</color>
+    <color name="placeLightGray">#e4e4e4</color>
+    <color name="placeGray">#888888</color>
+    <color name="placeBlack">#222222</color>
+    <color name="placePink">#ffa7d1</color>
+    <color name="placeRed">#e50000</color>
+    <color name="placeOrange">#e59500</color>
+    <color name="placeBrown">#a06a42</color>
+    <color name="placeYellow">#e5d900</color>
+    <color name="placeLightGreen">#94e044</color>
+    <color name="placeGreen">#02be01</color>
+    <color name="placeAquaBlue">#0083c7</color>
+    <color name="placeGreenBlue">#00d3dd</color>
+    <color name="placeBlue">#0000ea</color>
+    <color name="placeViolet">#cf6ee4</color>
+    <color name="placePurple">#820080</color>
+
+    <color name="pixelhobbyWhite">#E8EBED</color>
+    <color name="pixelhobbyLightGray">#C4C7C8</color>
+    <color name="pixelhobbyGray">#B0D3CD</color>
+    <color name="pixelhobbyBlack">#1F2A32</color>
+    <color name="pixelhobbyPink">#E7C0C3</color>
+    <color name="pixelhobbyRed">#B22E23</color>
+    <color name="pixelhobbyOrange">#E79523</color>
+    <color name="pixelhobbyBrown">#9A6944</color>
+    <color name="pixelhobbyYellow">#D6CD30</color>
+    <color name="pixelhobbyLightGreen">#75A958</color>
+    <color name="pixelhobbyGreen">#328529</color>
+    <color name="pixelhobbyAquaBlue">#459BC1</color>
+    <color name="pixelhobbyGreenBlue">#00A99D</color>
+    <color name="pixelhobbyBlue">#005EAB</color>
+    <color name="pixelhobbyViolet">#B285AF</color>
+    <color name="pixelhobbyPurple">#97326B</color>
 </resources>

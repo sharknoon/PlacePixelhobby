@@ -14,4 +14,27 @@
     <string name="next">Weiter</string>
     <string name="selected">Ausgewählt</string>
     <string name="x_images_selected_plural">%1$d Bilder ausgewählt</string>
+    <string name="finish">Fertig</string>
+    <string name="x_of_y_colors">%1$d von %2$d Farben</string>
+    <string name="color">Farbe</string>
+    <string name="info">Info</string>
+    <string name="light_gray">Hellgrau</string>
+    <string name="gray">Grau</string>
+    <string name="white">Weiss</string>
+    <string name="black">Schwarz</string>
+    <string name="pink">Pink</string>
+    <string name="red">Rot</string>
+    <string name="orange">Orange</string>
+    <string name="brown">Braun</string>
+    <string name="light_green">Hellgrün</string>
+    <string name="green">Grün</string>
+    <string name="aqua_blue">Wasser-Blau</string>
+    <string name="green_blue">Grün-Blau</string>
+    <string name="blue">Blau</string>
+    <string name="violet">Violett</string>
+    <string name="yellow">Gelb</string>
+    <string name="purple">Lila</string>
+    <string name="color_information">Farbinformation</string>
+    <string name="cut">Schneiden</string>
+    <string name="amount_pixels">%1$d Pixel%n%2$.2f Farbquadrate</string>
 </resources>

@@ -5,19 +5,16 @@ import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import android.support.v7.widget.GridLayoutManager
-import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.TextView
 import de.sharknoon.placepixelhobby.R
-import de.sharknoon.placepixelhobby.SubimageFavoriteAdapter
 import de.sharknoon.placepixelhobby.activities.ImageActivity
+import de.sharknoon.placepixelhobby.adapters.SubimageFavoriteAdapter
 import de.sharknoon.placepixelhobby.model.Subimage
 import de.sharknoon.placepixelhobby.model.SubimageExtensions.favorite
 import de.sharknoon.placepixelhobby.utils.getAllSubimages
@@ -59,15 +56,14 @@ class ImagesFragment : Fragment() {
 
         val recyclerView =
             view.findViewById<RecyclerView>(R.id.recycler_view_fragment_images_favorite_subimages)
-        recyclerView?.layoutManager =
-            LinearLayoutManager(view.context, LinearLayoutManager.HORIZONTAL, false)
-        val adapter = SubimageFavoriteAdapter(view.context, subImages)
+        val adapter =
+            SubimageFavoriteAdapter(view.context, subImages, R.layout.view_holder_image_favorite)
         adapter.setSubimageClickListener { _, subimage ->
             openImageActivity("${subimage.name}_detailed")
         }
 
-        adapter.setFavoriteClickListener { button, subimage ->
-            toggleImageFavorite(subimage, button)
+        adapter.setFavoriteClickListener { _, subimage ->
+            toggleImageFavorite(subimage)
         }
 
         recyclerView?.adapter = adapter
@@ -85,14 +81,14 @@ class ImagesFragment : Fragment() {
         // set up the RecyclerView
         val recyclerView =
             view.findViewById<RecyclerView>(R.id.recycler_view_fragment_images_all_subimages)
-        recyclerView?.layoutManager = GridLayoutManager(view.context, 4)
-        val adapter = SubimageFavoriteAdapter(view.context, subImages)
+        val adapter =
+            SubimageFavoriteAdapter(view.context, subImages, R.layout.view_holder_image_all)
         adapter.setSubimageClickListener { _, subimage ->
             openImageActivity("${subimage.name}_detailed")
         }
 
-        adapter.setFavoriteClickListener { button, subimage ->
-            toggleImageFavorite(subimage, button)
+        adapter.setFavoriteClickListener { _, subimage ->
+            toggleImageFavorite(subimage)
         }
         recyclerView?.adapter = adapter
 
@@ -105,7 +101,7 @@ class ImagesFragment : Fragment() {
         view?.context?.startActivity(myIntent)
     }
 
-    private fun toggleImageFavorite(item: Subimage, button: Button) {
+    private fun toggleImageFavorite(item: Subimage) {
         val prefs = favoriteImagePrefs ?: return
 
         //Checking for turning off or on the favorite

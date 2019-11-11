@@ -2,13 +2,12 @@ package de.sharknoon.placepixelhobby.fragments
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import de.sharknoon.placepixelhobby.R
-import de.sharknoon.placepixelhobby.SubimageSelectableAdapter
+import de.sharknoon.placepixelhobby.adapters.SubimageSelectableAdapter
 import de.sharknoon.placepixelhobby.model.Subimage
 import de.sharknoon.placepixelhobby.model.SubimageExtensions.selected
 import de.sharknoon.placepixelhobby.utils.getAllSubimages
@@ -40,8 +39,8 @@ class ImageSelectionFragment : Fragment() {
         // set up the RecyclerView
         val recyclerView =
             view.findViewById<RecyclerView>(R.id.recycler_view_fragment_image_selection)
-        recyclerView?.layoutManager = GridLayoutManager(view.context, 4)
-        val adapter = SubimageSelectableAdapter(view.context, subImages)
+        val adapter =
+            SubimageSelectableAdapter(view.context, subImages)
         adapter.setSubimageClickListener { _, subimage ->
             toggleImageSelection(subimage)
         }

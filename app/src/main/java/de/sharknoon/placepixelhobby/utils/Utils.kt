@@ -1,13 +1,20 @@
 package de.sharknoon.placepixelhobby.utils
 
 import android.content.Context
+import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.graphics.Paint
 import android.graphics.PaintFlagsDrawFilter
+import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
 import android.graphics.drawable.DrawableWrapper
+import android.support.v4.app.Fragment
+import android.util.Log
 import de.sharknoon.placepixelhobby.R
+import de.sharknoon.placepixelhobby.model.PixelColor
 import de.sharknoon.placepixelhobby.model.Subimage
+import java.util.stream.Collectors
+
 
 class AliasingDrawableWrapper(wrapped: Drawable) : DrawableWrapper(wrapped) {
 
@@ -50,4 +57,88 @@ fun getAllSubimages(context: Context, detailed: Boolean): MutableList<Subimage> 
         }
         list
     }.getOrDefault(mutableListOf())
+}
+
+fun swapFragment(parent: Fragment, container: Int, newFragment: Fragment) {
+    parent.childFragmentManager.beginTransaction().apply {
+        replace(container, newFragment)
+        commit()
+    }
+}
+
+fun countColors(images: Collection<Subimage>) =
+    images.stream()
+        .map { it.image.toBitmap() }
+        .map(::countColorsPerImage)
+        .flatMap { it.entries.stream() }
+        .collect(
+            Collectors.groupingBy(
+                Map.Entry<PixelColor, Int>::key,
+                Collectors.summingInt(Map.Entry<PixelColor, Int>::value)
+            )
+        )
+
+
+fun countColorsPerImage(bitmap: Bitmap): Map<PixelColor, Int> {
+    val tag = "Utils"
+    val colorMap = mutableMapOf<Int, Int>()
+
+    for (x in 0 until bitmap.width) {
+        for (y in 0 until bitmap.height) {
+            val color = bitmap.getPixel(x, y)
+            if (colorMap.containsKey(color)) {
+                colorMap[color] = colorMap.getOrDefault(color, 0) + 1
+            } else {
+                colorMap[color] = 1
+            }
+        }
+    }
+
+    val pixelColorMap = mutableMapOf<PixelColor, Int>()
+
+    for ((c, a) in colorMap) {
+        val pixelColor = PixelColor.fromPlaceRGB(c)
+        if (pixelColor != null) {
+            pixelColorMap[pixelColor] = a
+        } else {
+            Log.w(tag, "Unknown color $c")
+        }
+    }
+
+    return pixelColorMap
+}
+
+fun Drawable.toBitmap(): Bitmap {
+    if (this is DrawableWrapper) {
+        val drawable = this.drawable
+        if (drawable != null && drawable is BitmapDrawable) {
+            return drawable.bitmap
+        }
+    }
+
+    if (this is BitmapDrawable) {
+        val bitmapDrawable = this
+        if (bitmapDrawable.bitmap != null) {
+            return bitmapDrawable.bitmap
+        }
+    }
+
+    val bitmap = if (this.intrinsicWidth <= 0 || this.intrinsicHeight <= 0) {
+        Bitmap.createBitmap(
+            1,
+            1,
+            Bitmap.Config.ARGB_8888
+        ) // Single color bitmap will be created of 1x1 pixel
+    } else {
+        Bitmap.createBitmap(
+            this.intrinsicWidth,
+            this.intrinsicHeight,
+            Bitmap.Config.ARGB_8888
+        )
+    }
+
+    val canvas = Canvas(bitmap)
+    this.setBounds(0, 0, canvas.width, canvas.height)
+    this.draw(canvas)
+    return bitmap
 }

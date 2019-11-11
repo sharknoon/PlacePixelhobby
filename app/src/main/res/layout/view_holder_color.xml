@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/layout_distance_medium"
+    android:orientation="horizontal">
+
+    <RelativeLayout
+        android:layout_width="@dimen/image_size_large"
+        android:layout_height="@dimen/image_size_large">
+
+        <View
+            android:id="@+id/view_view_holder_color_display"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/color" />
+
+        <ImageView
+            android:id="@+id/image_view_view_holder_color_info"
+            android:layout_width="@dimen/button_size_small"
+            android:layout_height="@dimen/button_size_small"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="@dimen/layout_distance_small"
+            android:layout_marginEnd="@dimen/layout_distance_small"
+            android:contentDescription="@string/info"
+            android:src="@drawable/ic_info" />
+
+        <TextView
+            android:id="@+id/text_view_view_holder_color_name_and_number"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:background="@color/colorWhiteTransparent"
+            android:minLines="2"
+            android:paddingStart="@dimen/layout_distance_small"
+            android:paddingEnd="0dp"
+            android:singleLine="false"
+            android:textColor="@color/colorBlack" />
+
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/text_view_view_holder_color_amount_pixels"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginStart="@dimen/layout_distance_small"
+        android:layout_marginEnd="@dimen/layout_distance_small"
+        android:layout_weight="1"
+        android:gravity="center_horizontal"
+        android:lines="2"
+        android:singleLine="false"
+        android:textColor="@color/colorBlack"
+        android:textSize="@dimen/text_size_small" />
+
+    <ImageButton
+        android:id="@+id/button_view_holder_color_cut"
+        android:layout_width="@dimen/button_size_medium"
+        android:layout_height="@dimen/button_size_medium"
+        android:layout_gravity="center"
+        android:contentDescription="@string/cut"
+        android:scaleType="fitXY"
+        android:src="@drawable/ic_cut" />
+
+
+</LinearLayout>

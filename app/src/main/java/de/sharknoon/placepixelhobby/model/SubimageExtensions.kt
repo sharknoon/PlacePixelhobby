@@ -1,27 +1,35 @@
 package de.sharknoon.placepixelhobby.model
 
-private val FAVORITE_CACHE = mutableMapOf<Subimage, Boolean>()
-private val SELECTED_CACHE = mutableMapOf<Subimage, Boolean>()
+private val FAVORITE_CACHE = mutableSetOf<Subimage>()
+private val SELECTED_CACHE = mutableSetOf<Subimage>()
 
 object SubimageExtensions {
 
     var Subimage.favorite: Boolean
-        get() = FAVORITE_CACHE[this] ?: false
+        get() = FAVORITE_CACHE.contains(this)
         set(value) {
-            if (value) FAVORITE_CACHE[this] = true else FAVORITE_CACHE.remove(this)
+            if (value) FAVORITE_CACHE.add(this) else FAVORITE_CACHE.remove(this)
         }
 
     var Subimage.selected: Boolean
-        get() = SELECTED_CACHE[this] ?: false
+        get() = SELECTED_CACHE.contains(this)
         set(value) {
-            if (value) SELECTED_CACHE[this] = true else SELECTED_CACHE.remove(this)
+            if (value) SELECTED_CACHE.add(this) else SELECTED_CACHE.remove(this)
             triggerAllSelectionChangeListeners()
         }
 
     private val SELECTION_CHANCE_LISTENERS = mutableSetOf<(Int) -> Unit>()
-    fun onSelectionChanged(change: (newSelection: Int) -> Unit) {
+    fun addSelectionChangeListener(change: (newSelection: Int) -> Unit) {
         SELECTION_CHANCE_LISTENERS.add(change)
         change(SELECTED_CACHE.size)
+    }
+
+    fun removeSelectionChangeListener(change: (newSelection: Int) -> Unit) {
+        SELECTION_CHANCE_LISTENERS.remove(change)
+    }
+
+    fun getSelectedImages(): Set<Subimage> {
+        return SELECTED_CACHE
     }
 
     fun clearSelections() {

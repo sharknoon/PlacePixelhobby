@@ -4,6 +4,7 @@ import android.content.Context
 import android.graphics.drawable.Drawable
 import de.sharknoon.placepixelhobby.utils.AliasingDrawableWrapper
 
+
 class Subimage private constructor(
     val image: Drawable,
     val id: Int,
@@ -20,8 +21,8 @@ class Subimage private constructor(
         fun fromID(context: Context, id: Int): Subimage {
             //Checking the cache
             IMAGE_CACHE[id]?.also { return it }
-            //Getting the drawable, name and properties of the subimage
-            val drawable = context.getDrawable(id)
+            //Getting the drawable, displayName and properties of the subimage
+            val drawable = context.resources.getDrawable(id, context.theme)
                 ?: throw IllegalArgumentException("Drawable ID $id not found!")
             val name = context.resources.getResourceEntryName(id)
             val subNames = name.split('_')

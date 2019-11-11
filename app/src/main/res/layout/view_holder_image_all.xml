@@ -1,12 +1,12 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="75dp"
-    android:layout_height="@dimen/image_size_medium"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
     android:layout_margin="@dimen/layout_distance_medium">
 
     <ImageView
         android:id="@+id/image_view_view_holder_image_favorite_image"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:adjustViewBounds="true"
         android:contentDescription="@string/images"
         android:scaleType="fitXY" />

@@ -1,27 +1,31 @@
-package de.sharknoon.placepixelhobby
+package de.sharknoon.placepixelhobby.adapters
 
 import android.content.Context
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import de.sharknoon.placepixelhobby.R
 import de.sharknoon.placepixelhobby.model.Subimage
 import de.sharknoon.placepixelhobby.model.SubimageExtensions.favorite
 
-open class SubimageFavoriteAdapter(context: Context, private val data: MutableList<Subimage>) :
+open class SubimageFavoriteAdapter(
+    context: Context,
+    private val data: MutableList<Subimage>,
+    private val viewHolderLayout: Int
+) :
     RecyclerView.Adapter<SubimageFavoriteAdapter.SubimageFavoriteViewHolder>() {
 
 
     private val inflater = LayoutInflater.from(context)
     private var subimageClickListener: (view: View, item: Subimage) -> Unit = { _, _ -> }
-    private var favoriteClickListener: (button: Button, item: Subimage) -> Unit = { _, _ -> }
+    private var favoriteClickListener: (view: View, item: Subimage) -> Unit = { _, _ -> }
 
     // inflates the row layout from xml when needed
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SubimageFavoriteViewHolder {
-        val view = inflater.inflate(R.layout.view_holder_image_favorite, parent, false)
+        val view = inflater.inflate(viewHolderLayout, parent, false)
         return SubimageFavoriteViewHolder(view)
     }
 
@@ -32,7 +36,7 @@ open class SubimageFavoriteAdapter(context: Context, private val data: MutableLi
         val subfavorite = if (subimage.favorite) R.drawable.ic_star else R.drawable.ic_star_empty
         holder.textViewSubimageName.text = subtext
         holder.imageViewSubimage.setImageDrawable(subimage.image)
-        holder.buttonFavorite.setBackgroundResource(subfavorite)
+        holder.imageViewFavorite.setImageResource(subfavorite)
     }
 
 
@@ -50,17 +54,17 @@ open class SubimageFavoriteAdapter(context: Context, private val data: MutableLi
         internal var textViewSubimageName =
             itemView.findViewById<TextView>(R.id.text_view_view_holder_image_favorite)
         internal var imageViewSubimage =
-            itemView.findViewById<ImageView>(R.id.image_view_view_holder_image_favorite)
-        internal val buttonFavorite =
-            itemView.findViewById<Button>(R.id.button_view_holder_image_favorite)
+            itemView.findViewById<ImageView>(R.id.image_view_view_holder_image_favorite_image)
+        internal val imageViewFavorite =
+            itemView.findViewById<ImageView>(R.id.image_view_view_holder_image_favorite_star)
 
         init {
             itemView.setOnClickListener {
                 subimageClickListener(it, getItem(adapterPosition))
             }
 
-            buttonFavorite?.setOnClickListener {
-                favoriteClickListener(buttonFavorite, getItem(adapterPosition))
+            imageViewFavorite?.setOnClickListener {
+                favoriteClickListener(imageViewFavorite, getItem(adapterPosition))
             }
         }
 
@@ -106,7 +110,7 @@ open class SubimageFavoriteAdapter(context: Context, private val data: MutableLi
         this.subimageClickListener = subimageClickListener
     }
 
-    fun setFavoriteClickListener(favoriteClickListener: (button: Button, item: Subimage) -> Unit) {
+    fun setFavoriteClickListener(favoriteClickListener: (view: View, item: Subimage) -> Unit) {
         this.favoriteClickListener = favoriteClickListener
     }
 

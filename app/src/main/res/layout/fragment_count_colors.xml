@@ -9,12 +9,13 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
         android:layout_above="@id/linear_layout_fragment_counter_bottom_bar">
 
         <FrameLayout
             android:id="@+id/view_fragment_counter_container"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="match_parent" />
 
     </FrameLayout>
 
