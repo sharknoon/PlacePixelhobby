@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingStart="20dp"
+    android:paddingTop="10dp"
+    android:paddingEnd="20dp"
+    android:paddingBottom="20dp">
+
+    <TextView
+        android:id="@+id/text_view_alert_cutinformation_amount_plates"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:paddingBottom="@dimen/layout_distance_medium"
+        android:text="@string/x_full_plates_plus"
+        android:textSize="@dimen/text_size_medium" />
+
+    <de.sharknoon.placepixelhobby.utils.PixelhobbyPlateView
+        android:id="@+id/pixelhobby_plate_view_alert_cutinformation"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:padding="10dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:paddingTop="@dimen/layout_distance_medium"
+        android:text="Algorithmus zur Bestimmung des Schnittes kommt bald"
+        android:textSize="@dimen/text_size_small" />
+
+</LinearLayout>

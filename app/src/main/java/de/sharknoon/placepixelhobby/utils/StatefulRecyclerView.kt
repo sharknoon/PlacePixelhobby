@@ -63,7 +63,7 @@ class StatefulRecyclerView : RecyclerView {
     }
 
     companion object {
-        private val SAVED_SUPER_STATE = "super-state"
-        private val SAVED_LAYOUT_MANAGER = "layout-manager-state"
+        private const val SAVED_SUPER_STATE = "super-state"
+        private const val SAVED_LAYOUT_MANAGER = "layout-manager-state"
     }
 }

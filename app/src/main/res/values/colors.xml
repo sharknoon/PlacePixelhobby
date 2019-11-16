@@ -7,6 +7,7 @@
     <color name="colorWhiteTransparent">#A6FFFFFF</color>
     <color name="colorBlack">#000000</color>
     <color name="colorTransparent">#00000000</color>
+    <color name="colorDark">#424242</color>
 
     <color name="placeWhite">#ffffff</color>
     <color name="placeLightGray">#e4e4e4</color>

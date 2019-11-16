@@ -1,6 +1,7 @@
 package de.sharknoon.placepixelhobby.fragments
 
 
+import android.arch.lifecycle.MutableLiveData
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
@@ -11,7 +12,8 @@ import android.widget.TextView
 import de.sharknoon.placepixelhobby.R
 import de.sharknoon.placepixelhobby.model.SubimageExtensions
 import de.sharknoon.placepixelhobby.utils.countColors
-import de.sharknoon.placepixelhobby.utils.swapFragment
+import de.sharknoon.placepixelhobby.utils.replaceChildFragment
+
 
 class CountColorsFragment : Fragment() {
 
@@ -28,25 +30,35 @@ class CountColorsFragment : Fragment() {
         SELECTION, COLOR_VIEW
     }
 
-    private var currentState = States.SELECTION
+    private var currentState = MutableLiveData<States>().apply {
+        value = States.SELECTION
+    }
 
     override fun onResume() {
         super.onResume()
 
-        switchState(States.SELECTION)
+        currentState.observeForever {
+            it?.also { ns -> setState(ns) }
+        }
         //Listening to the next button
         val button = requireActivity().findViewById<Button>(R.id.button_fragment_counter_next)
-        button?.setOnClickListener { toggleState() }
-    }
-
-    private fun toggleState() {
-        when (currentState) {
-            States.SELECTION -> switchState(States.COLOR_VIEW)
-            States.COLOR_VIEW -> switchState(States.SELECTION)
+        button?.setOnClickListener {
+            toggleState()
+            if (currentState.value == States.SELECTION) {
+                //Clearing the selection of the previous recyclerview
+                SubimageExtensions.clearSelections()
+            }
         }
     }
 
-    private fun switchState(newState: States) {
+    private fun toggleState() {
+        when (currentState.value) {
+            States.SELECTION -> currentState.value = States.COLOR_VIEW
+            States.COLOR_VIEW -> currentState.value = States.SELECTION
+        }
+    }
+
+    private fun setState(newState: States) {
         val textView = requireActivity()
             .findViewById<TextView>(R.id.text_view_fragment_counter_amount_selected_images)
         val button = requireActivity()
@@ -57,10 +69,6 @@ class CountColorsFragment : Fragment() {
                 val selectedImages = SubimageExtensions.getSelectedImages()
                 //...and count the colors
                 val amountColors = countColors(selectedImages)
-                //Changing the current state
-                currentState = States.COLOR_VIEW
-                //Clearing the selection of the previous recyclerview
-                SubimageExtensions.clearSelections()
                 //Changing the bottom text
                 SubimageExtensions.removeSelectionChangeListener(this::onSelectionChanged)
                 textView.text = getString(R.string.x_of_y_colors, amountColors.size, 16)
@@ -70,18 +78,17 @@ class CountColorsFragment : Fragment() {
                 button?.isEnabled = true
 
                 //Changing the fragment
-                val fragment = ListColorsFragment.newInstance(amountColors)
-                swapFragment(this, R.id.view_fragment_counter_container, fragment)
+                val fragment = ListColorsFragment.getInstance(amountColors)
+                replaceChildFragment(R.id.view_fragment_counter_container, fragment)
 
             }
             States.SELECTION -> {
-                currentState = States.SELECTION
                 SubimageExtensions.addSelectionChangeListener(this::onSelectionChanged)
                 button?.text = resources.getString(R.string.next)
 
                 //Changing the fragment
                 val fragment = ImageSelectionFragment.getInstance()
-                swapFragment(this, R.id.view_fragment_counter_container, fragment)
+                replaceChildFragment(R.id.view_fragment_counter_container, fragment)
             }
         }
     }
@@ -91,14 +98,24 @@ class CountColorsFragment : Fragment() {
             .findViewById<TextView>(R.id.text_view_fragment_counter_amount_selected_images)
         val button = requireActivity()
             .findViewById<Button>(R.id.button_fragment_counter_next)
-        textView.text = resources.getString(
-            if (amountSelected == 1) {
-                R.string.x_images_selected_singular
-            } else {
-                R.string.x_images_selected_plural
-            }, amountSelected
+        textView.text = resources.getQuantityString(
+            R.plurals.x_images_selected,
+            amountSelected,
+            amountSelected
         )
         button.isEnabled = amountSelected > 0
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putSerializable("state", currentState.value)
+    }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        savedInstanceState?.also {
+            currentState.value = it.getSerializable("state") as States
+        }
     }
 
     companion object {

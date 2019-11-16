@@ -57,14 +57,10 @@ class ImagesFragment : Fragment() {
         val recyclerView =
             view.findViewById<RecyclerView>(R.id.recycler_view_fragment_images_favorite_subimages)
         val adapter =
-            SubimageFavoriteAdapter(view.context, subImages, R.layout.view_holder_image_favorite)
-        adapter.setSubimageClickListener { _, subimage ->
-            openImageActivity("${subimage.name}_detailed")
-        }
+            SubimageFavoriteAdapter(view.context, subImages, R.layout.view_holder_image)
+        adapter.setSubimageClickListener(this@ImagesFragment::openImageActivity)
 
-        adapter.setFavoriteClickListener { _, subimage ->
-            toggleImageFavorite(subimage)
-        }
+        adapter.setFavoriteClickListener(this@ImagesFragment::toggleImageFavorite)
 
         recyclerView?.adapter = adapter
 
@@ -82,23 +78,26 @@ class ImagesFragment : Fragment() {
         val recyclerView =
             view.findViewById<RecyclerView>(R.id.recycler_view_fragment_images_all_subimages)
         val adapter =
-            SubimageFavoriteAdapter(view.context, subImages, R.layout.view_holder_image_all)
-        adapter.setSubimageClickListener { _, subimage ->
-            openImageActivity("${subimage.name}_detailed")
-        }
+            SubimageFavoriteAdapter(view.context, subImages, R.layout.view_holder_image)
+        adapter.setSubimageClickListener(this@ImagesFragment::openImageActivity)
 
-        adapter.setFavoriteClickListener { _, subimage ->
-            toggleImageFavorite(subimage)
-        }
+        adapter.setFavoriteClickListener(this@ImagesFragment::toggleImageFavorite)
         recyclerView?.adapter = adapter
 
         allImagesRVAdapter = adapter
     }
 
-    private fun openImageActivity(imageName: String) {
-        val myIntent = Intent(view?.context, ImageActivity::class.java)
-        myIntent.putExtra("imageName", imageName)
-        view?.context?.startActivity(myIntent)
+    private fun openImageActivity(subimage: Subimage) {
+        val intent = Intent(view?.context, ImageActivity::class.java)
+        intent.putExtra("imageName", "${subimage.name}_detailed")
+        addTitleInformations(subimage, intent)
+        view?.context?.startActivity(intent)
+    }
+
+    private fun addTitleInformations(subimage: Subimage, intent: Intent) {
+        intent.putExtra("imageNo", subimage.number)
+        intent.putExtra("imageX", subimage.x)
+        intent.putExtra("imageY", subimage.y)
     }
 
     private fun toggleImageFavorite(item: Subimage) {

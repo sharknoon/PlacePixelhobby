@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import de.sharknoon.placepixelhobby.R
 import de.sharknoon.placepixelhobby.adapters.ColorAdapter
 import de.sharknoon.placepixelhobby.alerts.showColorInformationAlert
+import de.sharknoon.placepixelhobby.alerts.showPlateCuttingAlert
 import de.sharknoon.placepixelhobby.model.PixelColor
 
 
@@ -46,12 +47,12 @@ class ListColorsFragment : Fragment() {
             colors.map { it.key to it.value }
                 .sortedByDescending { it.second })
 
-        adapter.setColorInfoClickListener { _, color ->
-            openColorInfoDialog(color)
+        adapter.setColorInfoClickListener { color ->
+            showColorInformationAlert(requireActivity(), color)
         }
 
-        adapter.setButtonCutClickListener { _, color, amount ->
-            openCutPixelSquareDialog(color, amount)
+        adapter.setButtonCutClickListener { color, amount ->
+            showPlateCuttingAlert(requireActivity(), amount, color)
         }
 
         recyclerView?.adapter = adapter
@@ -59,17 +60,11 @@ class ListColorsFragment : Fragment() {
         colorsRVAdapter = adapter
     }
 
-
-    private fun openColorInfoDialog(color: PixelColor) {
-        showColorInformationAlert(requireActivity(), color)
-    }
-
-    private fun openCutPixelSquareDialog(color: PixelColor, amount: Int) {
-
-    }
-
     companion object {
-        fun newInstance(colors: Map<PixelColor, Int>): ListColorsFragment {
+        private val instances = mutableMapOf<Int, ListColorsFragment>()
+        fun getInstance(colors: Map<PixelColor, Int>): ListColorsFragment {
+            instances[colors.hashCode()]?.also { return it }
+
             val listColorsFragment = ListColorsFragment()
 
             val bundle = Bundle()
@@ -78,8 +73,12 @@ class ListColorsFragment : Fragment() {
             }
             listColorsFragment.arguments = bundle
 
+            instances[colors.hashCode()] = listColorsFragment
+
             return listColorsFragment
         }
+//
+//        private fun getHash()
     }
 
     private fun bundleToMap(bundle: Bundle): MutableMap<PixelColor, Int> {

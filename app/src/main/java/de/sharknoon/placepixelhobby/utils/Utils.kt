@@ -3,32 +3,17 @@ package de.sharknoon.placepixelhobby.utils
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.Canvas
-import android.graphics.Paint
-import android.graphics.PaintFlagsDrawFilter
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
 import android.graphics.drawable.DrawableWrapper
 import android.support.v4.app.Fragment
+import android.support.v4.app.FragmentActivity
 import android.util.Log
 import de.sharknoon.placepixelhobby.R
 import de.sharknoon.placepixelhobby.model.PixelColor
 import de.sharknoon.placepixelhobby.model.Subimage
 import java.util.stream.Collectors
 
-
-class AliasingDrawableWrapper(wrapped: Drawable) : DrawableWrapper(wrapped) {
-
-    override fun draw(canvas: Canvas) {
-        val oldDrawFilter = canvas.drawFilter
-        canvas.drawFilter = DRAW_FILTER
-        super.draw(canvas)
-        canvas.drawFilter = oldDrawFilter
-    }
-
-    companion object {
-        private val DRAW_FILTER = PaintFlagsDrawFilter(Paint.FILTER_BITMAP_FLAG, 0)
-    }
-}
 
 private object Subimages {
     var originalSubimages: MutableList<Subimage>? = null
@@ -59,14 +44,21 @@ fun getAllSubimages(context: Context, detailed: Boolean): MutableList<Subimage> 
     }.getOrDefault(mutableListOf())
 }
 
-fun swapFragment(parent: Fragment, container: Int, newFragment: Fragment) {
-    parent.childFragmentManager.beginTransaction().apply {
+fun Fragment.replaceChildFragment(container: Int, newFragment: Fragment) {
+    this.childFragmentManager.beginTransaction().apply {
         replace(container, newFragment)
         commit()
     }
 }
 
-fun countColors(images: Collection<Subimage>) =
+fun FragmentActivity.replaceChildFragment(container: Int, newFragment: Fragment) {
+    this.supportFragmentManager.beginTransaction().apply {
+        replace(container, newFragment)
+        commit()
+    }
+}
+
+fun countColors(images: Collection<Subimage>): MutableMap<PixelColor, Int> =
     images.stream()
         .map { it.image.toBitmap() }
         .map(::countColorsPerImage)

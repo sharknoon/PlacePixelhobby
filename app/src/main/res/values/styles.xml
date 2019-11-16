@@ -20,4 +20,13 @@
         <item name="android:background">@color/colorBlack</item>
     </style>
 
+    <style name="DarkDialogTheme" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="android:background">@color/colorDark</item>
+        <item name="android:textColor">@color/colorWhite</item>
+    </style>
+
+    <style name="LightDialogTheme" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="android:textColor">@color/colorBlack</item>
+    </style>
+
 </resources>

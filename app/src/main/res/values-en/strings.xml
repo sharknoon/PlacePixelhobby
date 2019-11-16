@@ -10,10 +10,12 @@
     <string name="all_images">All Images</string>
     <string name="favorite_images">Favorites</string>
     <string name="no_favorites">No favorites available</string>
-    <string name="x_images_selected_singular">%1$d image selected</string>
+    <plurals name="x_images_selected">
+        <item quantity="one">%1$d image selected</item>
+        <item quantity="other">%1$d images selected</item>
+    </plurals>
     <string name="next">Next</string>
     <string name="selected">Selected</string>
-    <string name="x_images_selected_plural">%1$d images selected</string>
     <string name="finish">Finish</string>
     <string name="x_of_y_colors">%1$d of %2$d colors</string>
     <string name="color">Color</string>
@@ -36,5 +38,19 @@
     <string name="purple">Purple</string>
     <string name="color_information">Color Information</string>
     <string name="cut">Cut</string>
-    <string name="amount_pixels">%1$d Pixel%n%2$.2f Colorsquare</string>
+    <string name="image_no_d_x_y">Image no. %1$d (%2$d|%3$d)</string>
+    <string name="name">Name</string>
+    <string name="pixelhobby_code">Pixelhobby-Code</string>
+    <string name="pixelhobby_rgb">Pixelhobby-RGB</string>
+    <string name="place_rgb">Place-RGB</string>
+    <string name="cut_information">Cut Information</string>
+    <string name="x_full_plates_plus">%1$d full plates +</string>
+    <plurals name="x_pixels">
+        <item quantity="one">%1$d Pixel</item>
+        <item quantity="other">%1$d Pixels</item>
+    </plurals>
+    <plurals name="x_squares">
+        <item quantity="one">%1$d Colorsquare</item>
+        <item quantity="other">%1$d Colorsquares</item>
+    </plurals>
 </resources>

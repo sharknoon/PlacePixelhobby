@@ -16,9 +16,9 @@ open class ColorAdapter(context: Context, private val data: List<Pair<PixelColor
 
 
     private val inflater = LayoutInflater.from(context)
-    private var colorInfoClickListener: (view: View, color: PixelColor) -> Unit = { _, _ -> }
-    private var buttonCutClickListener: (view: View, color: PixelColor, amountPixels: Int) -> Unit =
-        { _, _, _ -> }
+    private var colorInfoClickListener: (color: PixelColor) -> Unit = { _ -> }
+    private var buttonCutClickListener: (color: PixelColor, amountPixels: Int) -> Unit =
+        { _, _ -> }
 
     // inflates the row layout from xml when needed
     override fun onCreateViewHolder(
@@ -32,25 +32,31 @@ open class ColorAdapter(context: Context, private val data: List<Pair<PixelColor
     // binds the data to the TextView in each row
     override fun onBindViewHolder(holder: ColorViewHolder, position: Int) {
         val (color, amount) = data[position]
-        val c = inflater.context
-        val amountColorsquares = amount.toDouble() / 140.0
+        val r = inflater.context.resources
+        val amountColorsquares = amount / 140
+        val amountRestPixels = amount % 140
 
-        holder.imageViewColorDisplay.setBackgroundColor(
-            c.resources.getColor(
+        holder.getImageViewColorDisplay().setBackgroundColor(
+            r.getColor(
                 color.placeRGB,
                 null
             )
         )
-        holder.textViewColorNameAndNumber.text = c.getString(
+        holder.getTextViewColorNameAndNumber().text = r.getString(
             R.string.color_subtitle,
-            c.getString(color.displayName),
+            r.getString(color.displayName),
             color.pixelhobbyCode
         )
-        holder.textViewAmountPixels.text = c.getString(
-            R.string.amount_pixels,
-            amount,
-            amountColorsquares
-        )
+        holder.getTextViewAmountPixels().text = if (amountColorsquares > 0) {
+            r.getString(
+                R.string.x_pixels_y_squares_plus_z_pixels,
+                r.getQuantityString(R.plurals.x_pixels, amount, amount),
+                r.getQuantityString(R.plurals.x_squares, amountColorsquares, amountColorsquares),
+                r.getQuantityString(R.plurals.x_pixels, amountRestPixels, amountRestPixels)
+            )
+        } else {
+            r.getQuantityString(R.plurals.x_pixels, amount, amount)
+        }
     }
 
 
@@ -65,27 +71,30 @@ open class ColorAdapter(context: Context, private val data: List<Pair<PixelColor
     // stores and recycles views as they are scrolled off screen
     inner class ColorViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-        internal val imageViewColorDisplay =
+        private val imageViewColorDisplay =
             itemView.findViewById<View>(R.id.view_view_holder_color_display)
-        internal val imageViewColorInfo =
+        private val imageViewColorInfo =
             itemView.findViewById<ImageView>(R.id.image_view_view_holder_color_info)
-        internal val textViewColorNameAndNumber =
+        private val textViewColorNameAndNumber =
             itemView.findViewById<TextView>(R.id.text_view_view_holder_color_name_and_number)
-        internal val textViewAmountPixels =
+        private val textViewAmountPixels =
             itemView.findViewById<TextView>(R.id.text_view_view_holder_color_amount_pixels)
-        internal val buttonCut =
+        private val buttonCut =
             itemView.findViewById<ImageButton>(R.id.button_view_holder_color_cut)
 
         init {
             imageViewColorInfo.setOnClickListener {
-                colorInfoClickListener(it, getItem(adapterPosition).first)
+                colorInfoClickListener(getItem(adapterPosition).first)
             }
             buttonCut.setOnClickListener {
                 val (pixelColor, amount) = getItem(adapterPosition)
-                buttonCutClickListener(it, pixelColor, amount)
+                buttonCutClickListener(pixelColor, amount)
             }
         }
 
+        fun getImageViewColorDisplay(): View = imageViewColorDisplay
+        fun getTextViewColorNameAndNumber(): TextView = textViewColorNameAndNumber
+        fun getTextViewAmountPixels(): TextView = textViewAmountPixels
     }
 
     private fun getItem(position: Int): Pair<PixelColor, Int> {
@@ -93,11 +102,11 @@ open class ColorAdapter(context: Context, private val data: List<Pair<PixelColor
     }
 
     // allows clicks events to be caught
-    fun setColorInfoClickListener(colorInfoClickListener: (view: View, color: PixelColor) -> Unit) {
+    fun setColorInfoClickListener(colorInfoClickListener: (color: PixelColor) -> Unit) {
         this.colorInfoClickListener = colorInfoClickListener
     }
 
-    fun setButtonCutClickListener(buttonCutClickListener: (view: View, color: PixelColor, amount: Int) -> Unit) {
+    fun setButtonCutClickListener(buttonCutClickListener: (color: PixelColor, amount: Int) -> Unit) {
         this.buttonCutClickListener = buttonCutClickListener
     }
 

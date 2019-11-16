@@ -3,43 +3,61 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:baselineAligned="false"
+    android:orientation="@integer/fragment_images_orientation">
 
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="@dimen/layout_distance_medium"
-        android:text="@string/favorite_images"
-        android:textSize="@dimen/text_size_medium" />
+        android:layout_height="match_parent"
+        android:layout_weight="@integer/fragment_images_layout_weight"
+        android:orientation="vertical">
 
-    <de.sharknoon.placepixelhobby.utils.StatefulRecyclerView
-        android:id="@+id/recycler_view_fragment_images_favorite_subimages"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layoutManager="android.support.v7.widget.LinearLayoutManager" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/layout_distance_medium"
+            android:text="@string/favorite_images"
+            android:textSize="@dimen/text_size_medium" />
 
-    <TextView
-        android:id="@+id/text_view_fragment_images_no_favourites"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="@string/no_favorites"
-        android:textSize="@dimen/text_size_small"
-        android:visibility="visible" />
+        <de.sharknoon.placepixelhobby.utils.StatefulRecyclerView
+            android:id="@+id/recycler_view_fragment_images_favorite_subimages"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layoutManager="android.support.v7.widget.GridLayoutManager"
+            app:spanCount="4" />
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="@dimen/layout_distance_medium"
-        android:text="@string/all_images"
-        android:textSize="@dimen/text_size_medium" />
+        <TextView
+            android:id="@+id/text_view_fragment_images_no_favourites"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="@string/no_favorites"
+            android:textSize="@dimen/text_size_small"
+            android:visibility="visible" />
 
-    <de.sharknoon.placepixelhobby.utils.StatefulRecyclerView
-        android:id="@+id/recycler_view_fragment_images_all_subimages"
+    </LinearLayout>
+
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layoutManager="android.support.v7.widget.GridLayoutManager"
-        app:spanCount="@integer/column_count" />
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/layout_distance_medium"
+            android:text="@string/all_images"
+            android:textSize="@dimen/text_size_medium" />
+
+        <de.sharknoon.placepixelhobby.utils.StatefulRecyclerView
+            android:id="@+id/recycler_view_fragment_images_all_subimages"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layoutManager="android.support.v7.widget.GridLayoutManager"
+            app:spanCount="4" />
+
+    </LinearLayout>
 
 </LinearLayout>

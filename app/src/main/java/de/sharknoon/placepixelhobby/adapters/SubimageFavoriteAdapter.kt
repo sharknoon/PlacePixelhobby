@@ -11,6 +11,7 @@ import de.sharknoon.placepixelhobby.R
 import de.sharknoon.placepixelhobby.model.Subimage
 import de.sharknoon.placepixelhobby.model.SubimageExtensions.favorite
 
+
 open class SubimageFavoriteAdapter(
     context: Context,
     private val data: MutableList<Subimage>,
@@ -20,8 +21,8 @@ open class SubimageFavoriteAdapter(
 
 
     private val inflater = LayoutInflater.from(context)
-    private var subimageClickListener: (view: View, item: Subimage) -> Unit = { _, _ -> }
-    private var favoriteClickListener: (view: View, item: Subimage) -> Unit = { _, _ -> }
+    private var subimageClickListener: (item: Subimage) -> Unit = { _ -> }
+    private var favoriteClickListener: (item: Subimage) -> Unit = { _ -> }
 
     // inflates the row layout from xml when needed
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SubimageFavoriteViewHolder {
@@ -59,12 +60,24 @@ open class SubimageFavoriteAdapter(
             itemView.findViewById<ImageView>(R.id.image_view_view_holder_image_favorite_star)
 
         init {
-            itemView.setOnClickListener {
-                subimageClickListener(it, getItem(adapterPosition))
+            imageViewSubimage.apply {
+                setOnClickListener {
+                    subimageClickListener(getItem(adapterPosition))
+                }
+                setOnLongClickListener {
+                    favoriteClickListener(getItem(adapterPosition))
+                    true
+                }
             }
 
-            imageViewFavorite?.setOnClickListener {
-                favoriteClickListener(imageViewFavorite, getItem(adapterPosition))
+            imageViewFavorite.apply {
+                setOnClickListener {
+                    favoriteClickListener(getItem(adapterPosition))
+                }
+                setOnLongClickListener {
+                    favoriteClickListener(getItem(adapterPosition))
+                    true
+                }
             }
         }
 
@@ -106,11 +119,11 @@ open class SubimageFavoriteAdapter(
     }
 
     // allows clicks events to be caught
-    fun setSubimageClickListener(subimageClickListener: (view: View, item: Subimage) -> Unit) {
+    fun setSubimageClickListener(subimageClickListener: (item: Subimage) -> Unit) {
         this.subimageClickListener = subimageClickListener
     }
 
-    fun setFavoriteClickListener(favoriteClickListener: (view: View, item: Subimage) -> Unit) {
+    fun setFavoriteClickListener(favoriteClickListener: (item: Subimage) -> Unit) {
         this.favoriteClickListener = favoriteClickListener
     }
 

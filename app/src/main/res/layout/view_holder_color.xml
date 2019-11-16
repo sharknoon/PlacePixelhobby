@@ -24,7 +24,7 @@
             android:layout_marginTop="@dimen/layout_distance_small"
             android:layout_marginEnd="@dimen/layout_distance_small"
             android:contentDescription="@string/info"
-            android:src="@drawable/ic_info" />
+            android:src="@drawable/ic_info_light" />
 
         <TextView
             android:id="@+id/text_view_view_holder_color_name_and_number"
@@ -43,14 +43,12 @@
     <TextView
         android:id="@+id/text_view_view_holder_color_amount_pixels"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
+        android:layout_height="match_parent"
         android:layout_marginStart="@dimen/layout_distance_small"
         android:layout_marginEnd="@dimen/layout_distance_small"
         android:layout_weight="1"
-        android:gravity="center_horizontal"
-        android:lines="2"
-        android:singleLine="false"
+        android:gravity="center"
+        android:minLines="2"
         android:textColor="@color/colorBlack"
         android:textSize="@dimen/text_size_small" />
 

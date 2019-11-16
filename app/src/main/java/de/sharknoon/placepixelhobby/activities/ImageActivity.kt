@@ -26,7 +26,17 @@ class ImageActivity : AppCompatActivity() {
         val photoView = findViewById<PhotoView>(R.id.imageView)
         val aliasingDrawableWrapper = AliasingDrawableWrapper(drawable)
         photoView.setImageDrawable(aliasingDrawableWrapper)
-        photoView.maximumScale = 5F
+        photoView.maximumScale = 10F
+
+        setTitle()
+    }
+
+    private fun setTitle() {
+        val imageNo = intent.getIntExtra("imageNo", -1)
+        val imageX = intent.getIntExtra("imageX", -1)
+        val imageY = intent.getIntExtra("imageY", -1)
+
+        title = getString(R.string.image_no_d_x_y, imageNo, imageX, imageY)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

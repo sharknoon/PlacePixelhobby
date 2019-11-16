@@ -2,7 +2,6 @@ package de.sharknoon.placepixelhobby.activities
 
 import android.os.Bundle
 import android.support.design.widget.NavigationView
-import android.support.v4.app.Fragment
 import android.support.v4.widget.DrawerLayout
 import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
@@ -12,6 +11,7 @@ import de.sharknoon.placepixelhobby.R
 import de.sharknoon.placepixelhobby.fragments.CountColorsFragment
 import de.sharknoon.placepixelhobby.fragments.HistoryFragment
 import de.sharknoon.placepixelhobby.fragments.ImagesFragment
+import de.sharknoon.placepixelhobby.utils.replaceChildFragment
 import kotlinx.android.synthetic.main.activity_main.*
 
 
@@ -31,20 +31,29 @@ class MainActivity : AppCompatActivity() {
     private fun initBottomNavigationBar() {
         //Handles the click on the bottom_navigation_bar_menu bar
         bottom_navigation.setOnNavigationItemSelectedListener { item ->
-            return@setOnNavigationItemSelectedListener when (item.itemId) {
+            when (item.itemId) {
                 R.id.navigation_images -> {
                     //title = "${getString(R.string.app_name)} - ${getString(R.string.images)}"
-                    openFragment(ImagesFragment.getInstance())
+                    replaceChildFragment(
+                        R.id.view_fragment_counter_container,
+                        ImagesFragment.getInstance()
+                    )
                     true
                 }
                 R.id.navigation_history -> {
                     //title = "${getString(R.string.app_name)} - ${getString(R.string.history)}"
-                    openFragment(HistoryFragment.getInstance())
+                    replaceChildFragment(
+                        R.id.view_fragment_counter_container,
+                        HistoryFragment.getInstance()
+                    )
                     true
                 }
                 R.id.navigation_counter -> {
                     //title = "${getString(R.string.app_name)} - ${getString(R.string.count_colors)}"
-                    openFragment(CountColorsFragment.getInstance())
+                    replaceChildFragment(
+                        R.id.view_fragment_counter_container,
+                        CountColorsFragment.getInstance()
+                    )
                     true
                 }
                 else -> false
@@ -52,16 +61,8 @@ class MainActivity : AppCompatActivity() {
         }
         //Clicks the first item on the bottom_navigation_bar_menu bar at the start of the app
         bottom_navigation.selectedItemId = R.id.navigation_images
-    }
 
-    /**
-     * Changes a Fragment of the bottom bottom_navigation_bar_menu bar
-     */
-    private fun openFragment(fragment: Fragment) {
-        val transaction = supportFragmentManager.beginTransaction()
-        transaction.replace(R.id.container, fragment)
-        transaction.addToBackStack(null)
-        transaction.commit()
+
     }
 
     private fun initDrawer() {
