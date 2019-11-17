@@ -43,6 +43,7 @@ class HistoryFragment : Fragment() {
     private fun initSeekBar() {
         val a = requireActivity()
         val seekBar = a.findViewById<SeekBar>(R.id.seek_bar_fragment_history)
+        seekBar.progress = 0
         seekBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) =
                 updatePhotoView(progress)
