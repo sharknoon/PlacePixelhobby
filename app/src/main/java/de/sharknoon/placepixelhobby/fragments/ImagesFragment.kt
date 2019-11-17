@@ -89,6 +89,7 @@ class ImagesFragment : Fragment() {
 
     private fun openImageActivity(subimage: Subimage) {
         val intent = Intent(view?.context, ImageActivity::class.java)
+        intent.putExtra("originalImageName", subimage.name)
         intent.putExtra("imageName", "${subimage.name}_detailed")
         addTitleInformations(subimage, intent)
         view?.context?.startActivity(intent)

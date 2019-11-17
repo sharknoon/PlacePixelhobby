@@ -60,8 +60,7 @@ fun FragmentActivity.replaceChildFragment(container: Int, newFragment: Fragment)
 
 fun countColors(images: Collection<Subimage>): MutableMap<PixelColor, Int> =
     images.stream()
-        .map { it.image.toBitmap() }
-        .map(::countColorsPerImage)
+        .map(::countColors)
         .flatMap { it.entries.stream() }
         .collect(
             Collectors.groupingBy(
@@ -71,18 +70,16 @@ fun countColors(images: Collection<Subimage>): MutableMap<PixelColor, Int> =
         )
 
 
-fun countColorsPerImage(bitmap: Bitmap): Map<PixelColor, Int> {
+fun countColors(subimage: Subimage): Map<PixelColor, Int> {
     val tag = "Utils"
     val colorMap = mutableMapOf<Int, Int>()
+    val bitmap = subimage.image.toBitmap()
 
     for (x in 0 until bitmap.width) {
         for (y in 0 until bitmap.height) {
             val color = bitmap.getPixel(x, y)
-            if (colorMap.containsKey(color)) {
-                colorMap[color] = colorMap.getOrDefault(color, 0) + 1
-            } else {
-                colorMap[color] = 1
-            }
+            val currentAmountColors = colorMap.getOrPut(color, { 0 })
+            colorMap[color] = currentAmountColors + 1
         }
     }
 

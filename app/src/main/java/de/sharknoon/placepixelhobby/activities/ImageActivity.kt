@@ -1,6 +1,7 @@
 package de.sharknoon.placepixelhobby.activities
 
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.Menu
@@ -18,11 +19,11 @@ class ImageActivity : AppCompatActivity() {
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        setImage()
-        setTitle()
+        initImage()
+        initTitle()
     }
 
-    private fun setImage() {
+    private fun initImage() {
         val imageName = intent.getStringExtra("imageName")
         val id = applicationContext.resources
             .getIdentifier(imageName, "drawable", applicationContext.packageName)
@@ -34,7 +35,7 @@ class ImageActivity : AppCompatActivity() {
         photoView.maximumScale = 10F
     }
 
-    private fun setTitle() {
+    private fun initTitle() {
         val imageNo = intent.getIntExtra("imageNo", -1)
         val imageX = intent.getIntExtra("imageX", -1)
         val imageY = intent.getIntExtra("imageY", -1)
@@ -48,11 +49,26 @@ class ImageActivity : AppCompatActivity() {
                 finish()
                 true
             }
+            R.id.button_image_activity_action_bar_menu_info -> {
+                val imageName = intent.getStringExtra("originalImageName")
+                val id = applicationContext.resources
+                    .getIdentifier(imageName, "drawable", applicationContext.packageName)
+                openImageColorInfoActivity(id)
+                true
+            }
             else -> super.onOptionsItemSelected(item)
         }
     }
 
+    private fun openImageColorInfoActivity(drawableId: Int) {
+        val intent = Intent(this, ImageColorInfoActivity::class.java)
+        intent.putExtra("imageId", drawableId)
+        intent.putExtra("imageTitle", title)
+        this.startActivity(intent)
+    }
+
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        return true
+        menuInflater.inflate(R.menu.image_activity_action_bar_menu, menu)
+        return super.onCreateOptionsMenu(menu)
     }
 }

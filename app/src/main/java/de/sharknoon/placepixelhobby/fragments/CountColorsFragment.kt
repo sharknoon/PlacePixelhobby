@@ -79,7 +79,7 @@ class CountColorsFragment : Fragment() {
 
                 //Changing the fragment
                 val fragment = ListColorsFragment.getInstance(amountColors)
-                replaceChildFragment(R.id.view_fragment_counter_container, fragment)
+                replaceChildFragment(R.id.frame_layout_fragment_count_colors_container, fragment)
 
             }
             States.SELECTION -> {
@@ -88,7 +88,7 @@ class CountColorsFragment : Fragment() {
 
                 //Changing the fragment
                 val fragment = ImageSelectionFragment.getInstance()
-                replaceChildFragment(R.id.view_fragment_counter_container, fragment)
+                replaceChildFragment(R.id.frame_layout_fragment_count_colors_container, fragment)
             }
         }
     }

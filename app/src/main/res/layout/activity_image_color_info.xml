@@ -3,11 +3,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorBlack"
-    tools:context=".activities.ImageActivity">
+    android:background="@color/colorWhite"
+    tools:context=".activities.ImageColorInfoActivity">
 
-    <com.github.chrisbanes.photoview.PhotoView
-        android:id="@+id/photo_view_activity_image"
+    <FrameLayout
+        android:id="@+id/frame_layout_activity_image_color_info"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 

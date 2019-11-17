@@ -35,7 +35,7 @@ class MainActivity : AppCompatActivity() {
                 R.id.navigation_images -> {
                     //title = "${getString(R.string.app_name)} - ${getString(R.string.images)}"
                     replaceChildFragment(
-                        R.id.view_fragment_counter_container,
+                        R.id.frame_layout_fragment_count_colors_container,
                         ImagesFragment.getInstance()
                     )
                     true
@@ -43,7 +43,7 @@ class MainActivity : AppCompatActivity() {
                 R.id.navigation_history -> {
                     //title = "${getString(R.string.app_name)} - ${getString(R.string.history)}"
                     replaceChildFragment(
-                        R.id.view_fragment_counter_container,
+                        R.id.frame_layout_fragment_count_colors_container,
                         HistoryFragment.getInstance()
                     )
                     true
@@ -51,7 +51,7 @@ class MainActivity : AppCompatActivity() {
                 R.id.navigation_counter -> {
                     //title = "${getString(R.string.app_name)} - ${getString(R.string.count_colors)}"
                     replaceChildFragment(
-                        R.id.view_fragment_counter_container,
+                        R.id.frame_layout_fragment_count_colors_container,
                         CountColorsFragment.getInstance()
                     )
                     true
