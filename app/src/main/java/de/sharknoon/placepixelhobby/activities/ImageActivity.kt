@@ -18,17 +18,20 @@ class ImageActivity : AppCompatActivity() {
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
+        setImage()
+        setTitle()
+    }
+
+    private fun setImage() {
         val imageName = intent.getStringExtra("imageName")
         val id = applicationContext.resources
             .getIdentifier(imageName, "drawable", applicationContext.packageName)
         val drawable = getDrawable(id) ?: return
 
-        val photoView = findViewById<PhotoView>(R.id.imageView)
+        val photoView = findViewById<PhotoView>(R.id.photo_view_activity_image)
         val aliasingDrawableWrapper = AliasingDrawableWrapper(drawable)
         photoView.setImageDrawable(aliasingDrawableWrapper)
         photoView.maximumScale = 10F
-
-        setTitle()
     }
 
     private fun setTitle() {

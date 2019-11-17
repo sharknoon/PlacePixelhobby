@@ -19,8 +19,8 @@ enum class PixelColor(
     YELLOW(R.string.yellow, 133, R.color.pixelhobbyYellow, R.color.placeYellow),
     LIGHT_GREEN(R.string.light_green, 246, R.color.pixelhobbyLightGreen, R.color.placeLightGreen),
     GREEN(R.string.green, 245, R.color.pixelhobbyGreen, R.color.placeGreen),
-    AQUA_BLUE(R.string.aqua_blue, 469, R.color.pixelhobbyAquaBlue, R.color.placeAquaBlue),
     GREEN_BLUE(R.string.green_blue, 370, R.color.pixelhobbyGreenBlue, R.color.placeGreenBlue),
+    AQUA_BLUE(R.string.aqua_blue, 469, R.color.pixelhobbyAquaBlue, R.color.placeAquaBlue),
     BLUE(R.string.blue, 293, R.color.pixelhobbyBlue, R.color.placeBlue),
     VIOLET(R.string.violet, 442, R.color.pixelhobbyViolet, R.color.placeViolet),
     PURPLE(R.string.purple, 351, R.color.pixelhobbyPurple, R.color.placePurple);
