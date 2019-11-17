@@ -3,12 +3,14 @@ package de.sharknoon.placepixelhobby.utils
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.Canvas
+import android.graphics.Matrix
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
 import android.graphics.drawable.DrawableWrapper
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentActivity
 import android.util.Log
+import com.github.chrisbanes.photoview.PhotoView
 import de.sharknoon.placepixelhobby.R
 import de.sharknoon.placepixelhobby.model.PixelColor
 import de.sharknoon.placepixelhobby.model.Subimage
@@ -130,4 +132,11 @@ fun Drawable.toBitmap(): Bitmap {
     this.setBounds(0, 0, canvas.width, canvas.height)
     this.draw(canvas)
     return bitmap
+}
+
+fun PhotoView.setImageDrawableKeepZoom(drawable: Drawable) {
+    val displayMatrix = Matrix()
+    attacher.getSuppMatrix(displayMatrix)
+    setImageDrawable(drawable)
+    attacher.setDisplayMatrix(displayMatrix)
 }

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragments.PlaceFragment">
+
+    <com.github.chrisbanes.photoview.PhotoView
+        android:id="@+id/photo_view_fragment_final_clean"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentBottom="true" />
+
+    <RadioGroup
+        android:id="@+id/radio_group_fragment_place"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@color/colorPrimary"
+        android:orientation="horizontal">
+
+        <ToggleButton
+            android:id="@+id/toggle_button_fragment_place_original"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:checked="true"
+            android:textAllCaps="false"
+            android:textOff="@string/original"
+            android:textOn="@string/original" />
+
+        <ToggleButton
+            android:id="@+id/toggle_button_fragment_place_clean"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textAllCaps="false"
+            android:textOff="@string/final_clean"
+            android:textOn="@string/final_clean" />
+
+    </RadioGroup>
+
+</RelativeLayout>

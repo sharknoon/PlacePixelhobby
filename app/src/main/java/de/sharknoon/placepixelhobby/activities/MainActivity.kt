@@ -8,9 +8,7 @@ import android.support.v7.app.AppCompatActivity
 import android.view.MenuItem
 import android.widget.Toast
 import de.sharknoon.placepixelhobby.R
-import de.sharknoon.placepixelhobby.fragments.CountColorsFragment
-import de.sharknoon.placepixelhobby.fragments.HistoryFragment
-import de.sharknoon.placepixelhobby.fragments.ImagesFragment
+import de.sharknoon.placepixelhobby.fragments.*
 import de.sharknoon.placepixelhobby.utils.replaceChildFragment
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -33,23 +31,34 @@ class MainActivity : AppCompatActivity() {
         bottom_navigation.setOnNavigationItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.navigation_images -> {
-                    //title = "${getString(R.string.app_name)} - ${getString(R.string.images)}"
                     replaceChildFragment(
                         R.id.frame_layout_fragment_count_colors_container,
                         ImagesFragment.getInstance()
                     )
                     true
                 }
+                R.id.navigation_place -> {
+                    replaceChildFragment(
+                        R.id.frame_layout_fragment_count_colors_container,
+                        PlaceFragment.getInstance()
+                    )
+                    true
+                }
                 R.id.navigation_history -> {
-                    //title = "${getString(R.string.app_name)} - ${getString(R.string.history)}"
                     replaceChildFragment(
                         R.id.frame_layout_fragment_count_colors_container,
                         HistoryFragment.getInstance()
                     )
                     true
                 }
+                R.id.navigation_atlas -> {
+                    replaceChildFragment(
+                        R.id.frame_layout_fragment_count_colors_container,
+                        AtlasFragment.getInstance()
+                    )
+                    true
+                }
                 R.id.navigation_counter -> {
-                    //title = "${getString(R.string.app_name)} - ${getString(R.string.count_colors)}"
                     replaceChildFragment(
                         R.id.frame_layout_fragment_count_colors_container,
                         CountColorsFragment.getInstance()

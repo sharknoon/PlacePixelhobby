@@ -53,4 +53,8 @@
         <item quantity="one">%1$d Colorsquare</item>
         <item quantity="other">%1$d Colorsquares</item>
     </plurals>
+    <string name="final_clean">Cleaned</string>
+    <string name="atlas">Atlas</string>
+    <string name="original">Original</string>
+    <string name="image">Image</string>
 </resources>

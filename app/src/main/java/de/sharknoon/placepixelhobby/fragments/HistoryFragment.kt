@@ -1,6 +1,5 @@
 package de.sharknoon.placepixelhobby.fragments
 
-import android.graphics.Matrix
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
@@ -10,6 +9,7 @@ import android.widget.SeekBar
 import com.github.chrisbanes.photoview.PhotoView
 import de.sharknoon.placepixelhobby.R
 import de.sharknoon.placepixelhobby.utils.AliasingDrawableWrapper
+import de.sharknoon.placepixelhobby.utils.setImageDrawableKeepZoom
 
 class HistoryFragment : Fragment() {
 
@@ -67,11 +67,7 @@ class HistoryFragment : Fragment() {
 
         val aliasingDrawableWrapper = AliasingDrawableWrapper(drawable)
         val pv = photoView ?: return
-        val displayMatrix = Matrix()
-        //Buggy
-        pv.attacher.getSuppMatrix(displayMatrix)
-        pv.setImageDrawable(aliasingDrawableWrapper)
-        pv.attacher.setDisplayMatrix(displayMatrix)
+        pv.setImageDrawableKeepZoom(aliasingDrawableWrapper)
     }
 
     companion object {

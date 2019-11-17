@@ -53,4 +53,8 @@
         <item quantity="one">%1$d Farbquadrat</item>
         <item quantity="other">%1$d Farbquadrate</item>
     </plurals>
+    <string name="final_clean">Bereinigt</string>
+    <string name="atlas">Atlas</string>
+    <string name="original">Original</string>
+    <string name="image">Bild</string>
 </resources>
