@@ -9,16 +9,18 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_alignParentTop="true"
-        android:layout_alignParentBottom="true" />
+        android:layout_above="@+id/seek_bar_fragment_history" />
 
     <SeekBar
         android:id="@+id/seek_bar_fragment_history"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:background="@color/colorWhiteTransparent"
+        android:background="@color/colorPrimary"
         android:max="99"
         android:paddingTop="@dimen/layout_distance_large"
-        android:paddingBottom="@dimen/layout_distance_large" />
+        android:paddingBottom="@dimen/layout_distance_large"
+        android:progressTint="@color/colorWhite"
+        android:thumbTint="@color/colorWhite" />
 
 </RelativeLayout>

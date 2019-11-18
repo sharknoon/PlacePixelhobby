@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_alignParentTop="true"
-        android:layout_alignParentBottom="true" />
+        android:layout_above="@+id/radio_group_fragment_place" />
 
     <RadioGroup
         android:id="@+id/radio_group_fragment_place"
@@ -25,7 +25,6 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:checked="true"
             android:textAllCaps="false"
             android:textOff="@string/original"
             android:textOn="@string/original" />
