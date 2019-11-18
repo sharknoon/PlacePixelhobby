@@ -1,12 +1,12 @@
 package de.sharknoon.placepixelhobby.activities
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.NavigationView
 import android.support.v4.widget.DrawerLayout
 import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
 import android.view.MenuItem
-import android.widget.Toast
 import de.sharknoon.placepixelhobby.R
 import de.sharknoon.placepixelhobby.fragments.*
 import de.sharknoon.placepixelhobby.utils.replaceChildFragment
@@ -92,9 +92,8 @@ class MainActivity : AppCompatActivity() {
         navigationView.setNavigationItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.account -> {
-                    Toast.makeText(applicationContext, "Kommt bald", Toast.LENGTH_LONG).show()
-                    //val intent = Intent(this, SettingsActivity::class.java)
-                    //startActivity(intent)
+                    val intent = Intent(this, SourcesActivity::class.java)
+                    startActivity(intent)
                     drawerLayout.closeDrawers()
                     true
                 }
