@@ -71,7 +71,8 @@ class CountColorsFragment : Fragment() {
                 val amountColors = countColors(selectedImages)
                 //Changing the bottom text
                 SubimageExtensions.removeSelectionChangeListener(this::onSelectionChanged)
-                textView.text = getString(R.string.x_of_y_colors, amountColors.size, 16)
+                textView.text = resources
+                    .getQuantityString(R.plurals.x_of_y_colors, 16, amountColors.size, 16)
 
                 //Changing the button text
                 button?.text = resources.getString(R.string.finish)

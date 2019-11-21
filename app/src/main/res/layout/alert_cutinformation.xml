@@ -14,7 +14,6 @@
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
         android:paddingBottom="@dimen/layout_distance_medium"
-        android:text="@string/x_full_plates_plus"
         android:textSize="@dimen/text_size_medium" />
 
     <de.sharknoon.placepixelhobby.utils.PixelhobbyPlateView
@@ -22,13 +21,5 @@
         android:layout_width="300dp"
         android:layout_height="300dp"
         android:padding="10dp" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
-        android:paddingTop="@dimen/layout_distance_medium"
-        android:text="Algorithmus zur Bestimmung des Schnittes kommt bald"
-        android:textSize="@dimen/text_size_small" />
 
 </LinearLayout>

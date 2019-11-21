@@ -1,10 +1,8 @@
 <resources>
     <string name="app_name">Place Pixelhobby</string>
     <string name="count_colors">Farben zählen</string>
-    <string name="view_canvas">Bild ansehen</string>
     <string name="images">Bilder</string>
     <string name="history">Entstehung</string>
-    <string name="count_pixels">Pixel zählen</string>
     <string name="Close">Schließen</string>
     <string name="Open">Öffnen</string>
     <string name="all_images">Alle Bilder</string>
@@ -17,7 +15,10 @@
     <string name="next">Weiter</string>
     <string name="selected">Ausgewählt</string>
     <string name="finish">Fertig</string>
-    <string name="x_of_y_colors">%1$d von %2$d Farben</string>
+    <plurals name="x_of_y_colors">
+        <item quantity="one">%1$d von %2$d Farbe</item>
+        <item quantity="other">%1$d von %2$d Farben</item>
+    </plurals>
     <string name="color">Farbe</string>
     <string name="info">Info</string>
     <string name="light_gray">Hellgrau</string>
@@ -44,7 +45,10 @@
     <string name="pixelhobby_rgb">Pixelhobby-RGB</string>
     <string name="place_rgb">Place-RGB</string>
     <string name="cut_information">Schneideinformation</string>
-    <string name="x_full_plates_plus">%1$d ganze Platten +</string>
+    <plurals name="x_full_plates_plus">
+        <item quantity="one">%1$d ganze Platte +</item>
+        <item quantity="other">%1$d ganze Platten +</item>
+    </plurals>
     <plurals name="x_pixels">
         <item quantity="one">%1$d Pixel</item>
         <item quantity="other">%1$d Pixel</item>

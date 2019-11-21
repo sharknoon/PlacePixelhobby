@@ -47,16 +47,32 @@ open class ColorAdapter(context: Context, private val data: List<Pair<PixelColor
             r.getString(color.displayName),
             color.pixelhobbyCode
         )
-        holder.getTextViewAmountPixels().text = if (amountColorsquares > 0) {
-            r.getString(
-                R.string.x_pixels_y_squares_plus_z_pixels,
-                r.getQuantityString(R.plurals.x_pixels, amount, amount),
-                r.getQuantityString(R.plurals.x_squares, amountColorsquares, amountColorsquares),
-                r.getQuantityString(R.plurals.x_pixels, amountRestPixels, amountRestPixels)
-            )
-        } else {
-            r.getQuantityString(R.plurals.x_pixels, amount, amount)
-        }
+        holder.getTextViewAmountPixels().text =
+            if (amountColorsquares > 0 && amountRestPixels > 0) {
+                r.getString(
+                    R.string.new_line,
+                    r.getQuantityString(R.plurals.x_pixels, amount, amount),
+                    r.getString(
+                        R.string.x_plus_y,
+                        r.getQuantityString(
+                            R.plurals.x_squares,
+                            amountColorsquares,
+                            amountColorsquares
+                        ),
+                        r.getQuantityString(R.plurals.x_pixels, amountRestPixels, amountRestPixels)
+                    )
+                )
+            } else if (amountColorsquares < 1) {
+                r.getQuantityString(R.plurals.x_pixels, amount, amount)
+            } else if (amountColorsquares > 0) {
+                r.getString(
+                    R.string.new_line,
+                    r.getQuantityString(R.plurals.x_pixels, amount, amount),
+                    r.getQuantityString(R.plurals.x_squares, amountColorsquares, amountColorsquares)
+                )
+            } else {
+                "ERROR SHOULDN'T HAPPEN :("
+            }
     }
 
 

@@ -1,10 +1,8 @@
 <resources>
     <string name="app_name">Place Pixelhobby</string>
     <string name="count_colors">Count Colors</string>
-    <string name="view_canvas">View Canvas</string>
     <string name="images">Images</string>
     <string name="history">History</string>
-    <string name="count_pixels">Count Pixels</string>
     <string name="Open">Open</string>
     <string name="Close">Close</string>
     <string name="all_images">All Images</string>
@@ -17,7 +15,10 @@
     <string name="next">Next</string>
     <string name="selected">Selected</string>
     <string name="finish">Finish</string>
-    <string name="x_of_y_colors">%1$d of %2$d colors</string>
+    <plurals name="x_of_y_colors">
+        <item quantity="one">%1$d of %2$d color</item>
+        <item quantity="other">%1$d of %2$d colors</item>
+    </plurals>
     <string name="color">Color</string>
     <string name="info">Info</string>
     <string name="white">White</string>
@@ -45,8 +46,11 @@
     <string name="pixelhobby_rgb">Pixelhobby-RGB</string>
     <string name="place_rgb">Place-RGB</string>
     <string name="cut_information">Cut Information</string>
-    <string name="x_full_plates_plus">%1$d full plates +</string>
-    <string name="x_pixels_y_squares_plus_z_pixels" translatable="false">%1$s%n%2$s + %3$s</string>
+    <plurals name="x_full_plates_plus">
+        <item quantity="one">%1$d full plate +</item>
+        <item quantity="other">%1$d full plates +</item>
+    </plurals>
+    <string name="x_plus_y" translatable="false">%1$s + %2$s</string>
     <plurals name="x_pixels">
         <item quantity="one">%1$d Pixel</item>
         <item quantity="other">%1$d Pixels</item>
@@ -60,4 +64,14 @@
     <string name="original">Original</string>
     <string name="image">Image</string>
     <string name="sources">Sources</string>
+    <string name="new_line" translatable="false">%1$s%n%2$s</string>
+    <string name="credit_star" translatable="false">Icons made by https://www.flaticon.com/authors/smashicons from https://www.flaticon.com</string>
+    <string name="credit_image" translatable="false">Icons made by https://www.flaticon.com/authors/smashicons from https://www.flaticon.com</string>
+    <string name="credit_clock" translatable="false">Icons made by https://www.flaticon.com/authors/freepik from https://www.flaticon.com</string>
+    <string name="credit_counter" translatable="false">Icons made by https://www.flaticon.com/authors/freepik from https://www.flaticon.com</string>
+    <string name="credit_check" translatable="false">Icons made by https://www.flaticon.com/authors/pixel-perfect from https://www.flaticon.com</string>
+    <string name="credit_cut" translatable="false">Icons made by https://www.flaticon.com/authors/freepik from https://www.flaticon.com</string>
+    <string name="credit_info" translatable="false">Icons made by https://www.flaticon.com/authors/freepik from https://www.flaticon.com</string>
+    <string name="credit_compass" translatable="false">Icons made by https://www.flaticon.com/authors/google from https://www.flaticon.com</string>
+    <string name="credit_book" translatable="false">Icons made by https://www.flaticon.com/authors/freepik from https://www.flaticon.com</string>
 </resources>

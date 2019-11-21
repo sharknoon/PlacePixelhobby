@@ -9,8 +9,8 @@
         android:id="@+id/photo_view_fragment_final_clean"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_alignParentTop="true"
-        android:layout_above="@+id/radio_group_fragment_place" />
+        android:layout_above="@+id/radio_group_fragment_place"
+        android:layout_alignParentTop="true" />
 
     <RadioGroup
         android:id="@+id/radio_group_fragment_place"
@@ -27,7 +27,8 @@
             android:layout_weight="1"
             android:textAllCaps="false"
             android:textOff="@string/original"
-            android:textOn="@string/original" />
+            android:textOn="@string/original"
+            android:theme="@style/ToggleButton" />
 
         <ToggleButton
             android:id="@+id/toggle_button_fragment_place_clean"
@@ -36,7 +37,8 @@
             android:layout_weight="1"
             android:textAllCaps="false"
             android:textOff="@string/final_clean"
-            android:textOn="@string/final_clean" />
+            android:textOn="@string/final_clean"
+            android:theme="@style/ToggleButton" />
 
     </RadioGroup>
 

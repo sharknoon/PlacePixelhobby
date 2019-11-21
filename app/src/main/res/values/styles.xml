@@ -29,4 +29,11 @@
         <item name="android:textColor">@color/colorBlack</item>
     </style>
 
+    <style name="ToggleButton" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="android:textColorPrimary">@color/colorBlack</item>
+        <item name="colorAccent">@color/colorBlack</item>
+        <item name="android:colorControlNormal">@color/colorWhite</item>
+        <item name="android:colorButtonNormal">@color/colorWhite</item>
+    </style>
+
 </resources>

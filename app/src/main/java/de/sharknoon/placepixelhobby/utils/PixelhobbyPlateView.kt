@@ -1,10 +1,7 @@
 package de.sharknoon.placepixelhobby.utils
 
 import android.content.Context
-import android.graphics.Canvas
-import android.graphics.Color
-import android.graphics.Paint
-import android.graphics.Rect
+import android.graphics.*
 import android.util.AttributeSet
 import android.util.TypedValue
 import android.view.View
@@ -37,8 +34,16 @@ class PixelhobbyPlateView(context: Context, attrs: AttributeSet) : View(context,
         textSize = 48F
         textAlign = Paint.Align.LEFT
     }
+    private val paintCut = Paint().apply {
+        color = Color.RED
+        isAntiAlias = true
+        strokeWidth = 6.dp
+        style = Paint.Style.STROKE
+        pathEffect = DashPathEffect(arrayOf(30F, 30F).toFloatArray(), 0F)
+    }
     private val offset = paintFill.strokeWidth / 2
     private var color: PixelColor? = null
+    private var info: Array<BooleanArray> = emptyArray()
 
     fun setColor(color: PixelColor) {
         val c = context.getColor(color.placeRGB)
@@ -48,6 +53,10 @@ class PixelhobbyPlateView(context: Context, attrs: AttributeSet) : View(context,
         this.color = color
     }
 
+    fun setCuttingInformations(info: Array<BooleanArray>) {
+        this.info = info
+    }
+
     override fun onDraw(canvas: Canvas) {
         val plateSize = (300.dp - (2 * offset)).px.toInt()
         val amountColRow = 6
@@ -55,6 +64,10 @@ class PixelhobbyPlateView(context: Context, attrs: AttributeSet) : View(context,
         //In case of bright colors, draw dark text
         if (color == PixelColor.WHITE || color == PixelColor.LIGHT_GRAY) {
             paintText.color = Color.BLACK
+        }
+        //In case of dark colors, draw bright cutting line
+        if (color == PixelColor.RED) {
+            paintCut.color = Color.BLACK
         }
         //Rectangle
         canvas.drawRect(0F.offs, 0F.offs, plateSize.dp.offs, plateSize.dp.offs, paintStroke)
@@ -87,8 +100,8 @@ class PixelhobbyPlateView(context: Context, attrs: AttributeSet) : View(context,
                     paintFill
                 )
                 canvas.drawLine(
-                    x.dp.offs,
-                    y.dp.offs + margin + (0.5F * pixelSize),
+                    x.dp.offs + margin + (0.5F * pixelSize),
+                    y.dp.offs,
                     x.dp.offs + margin + (0.5F * pixelSize),
                     y.dp.offs + margin + (0.5F * pixelSize),
                     paintSmall
@@ -101,8 +114,8 @@ class PixelhobbyPlateView(context: Context, attrs: AttributeSet) : View(context,
                     paintFill
                 )
                 canvas.drawLine(
-                    x.dp.offs,
-                    y.dp.offs + (3 * margin) + (1.5F * pixelSize),
+                    x.dp.offs + margin + (0.5F * pixelSize),
+                    y.dp.offs + colRowSize.dp,
                     x.dp.offs + margin + (0.5F * pixelSize),
                     y.dp.offs + (3 * margin) + (1.5F * pixelSize),
                     paintSmall
@@ -117,8 +130,8 @@ class PixelhobbyPlateView(context: Context, attrs: AttributeSet) : View(context,
                 canvas.drawLine(
                     x.dp.offs + (3 * margin) + (1.5F * pixelSize),
                     y.dp.offs + margin + (0.5F * pixelSize),
-                    x.dp.offs + colRowSize.dp,
-                    y.dp.offs + margin + (0.5F * pixelSize),
+                    x.dp.offs + (3 * margin) + (1.5F * pixelSize),
+                    y.dp.offs,
                     paintSmall
                 )
                 canvas.drawRect(
@@ -131,8 +144,8 @@ class PixelhobbyPlateView(context: Context, attrs: AttributeSet) : View(context,
                 canvas.drawLine(
                     x.dp.offs + (3 * margin) + (1.5F * pixelSize),
                     y.dp.offs + (3 * margin) + (1.5F * pixelSize),
-                    x.dp.offs + colRowSize.dp,
-                    y.dp.offs + (3 * margin) + (1.5F * pixelSize),
+                    x.dp.offs + (3 * margin) + (1.5F * pixelSize),
+                    y.dp.offs + colRowSize.dp,
                     paintSmall
                 )
             }
@@ -146,6 +159,39 @@ class PixelhobbyPlateView(context: Context, attrs: AttributeSet) : View(context,
         val x = cWidth / 2f - clipBoundsHolder.width() / 2f - clipBoundsHolder.left
         val y = cHeight / 2f + clipBoundsHolder.height() / 2f - clipBoundsHolder.bottom
         canvas.drawText(text, x, y, paintText)
+        //cutting shapes
+        //val cutPixelSize = colRowSize / 2
+        for (x_coordinate in info.indices) {
+            for (y_coordinate in info[x_coordinate].indices) {
+                val currentPixel = info[x_coordinate][y_coordinate]
+                //check bottom pixel
+                if (y_coordinate < info[x_coordinate].lastIndex) {
+                    val bottomPixel = info[x_coordinate][y_coordinate + 1]
+                    if (currentPixel != bottomPixel) {
+                        canvas.drawLine(
+                            ((x_coordinate * colRowSize.dp) / 2).offs,
+                            (((y_coordinate + 1) * colRowSize.dp) / 2).offs,
+                            (((x_coordinate + 1) * colRowSize.dp) / 2).offs,
+                            (((y_coordinate + 1) * colRowSize.dp) / 2).offs,
+                            paintCut
+                        )
+                    }
+                }
+                //check right pixel
+                if (x_coordinate < info.lastIndex) {
+                    val rightPixel = info[x_coordinate + 1][y_coordinate]
+                    if (currentPixel != rightPixel) {
+                        canvas.drawLine(
+                            (((x_coordinate + 1) * colRowSize.dp) / 2).offs,
+                            ((y_coordinate * colRowSize.dp) / 2).offs,
+                            (((x_coordinate + 1) * colRowSize.dp) / 2).offs,
+                            (((y_coordinate + 1) * colRowSize.dp) / 2).offs,
+                            paintCut
+                        )
+                    }
+                }
+            }
+        }
     }
 
     companion object {

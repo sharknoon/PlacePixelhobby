@@ -1,11 +1,163 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v7.widget.GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/layout_distance_medium"
+    app:columnCount="2">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/layout_distance_medium"
+        android:layout_marginBottom="@dimen/layout_distance_medium"
+        android:contentDescription="@string/image"
+        android:src="@drawable/ic_star" />
 
     <TextView
-        android:layout_width="match_parent"
+        android:layout_width="330dp"
         android:layout_height="wrap_content"
-        android:text="Test" />
+        android:autoLink="all"
+        android:linksClickable="true"
+        android:text="@string/credit_star"
+        android:textColorLink="@color/colorAccent"
+        app:layout_gravity="center_vertical" />
 
-</LinearLayout>
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/layout_distance_medium"
+        android:layout_marginBottom="@dimen/layout_distance_medium"
+        android:contentDescription="@string/image"
+        android:src="@drawable/ic_image" />
+
+    <TextView
+        android:layout_width="330dp"
+        android:layout_height="wrap_content"
+        android:autoLink="all"
+        android:linksClickable="true"
+        android:text="@string/credit_image"
+        android:textColorLink="@color/colorAccent"
+        app:layout_gravity="center_vertical" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/layout_distance_medium"
+        android:layout_marginBottom="@dimen/layout_distance_medium"
+        android:contentDescription="@string/image"
+        android:src="@drawable/ic_clock" />
+
+    <TextView
+        android:layout_width="330dp"
+        android:layout_height="wrap_content"
+        android:autoLink="all"
+        android:linksClickable="true"
+        android:text="@string/credit_clock"
+        android:textColorLink="@color/colorAccent"
+        app:layout_gravity="center_vertical" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/layout_distance_medium"
+        android:layout_marginBottom="@dimen/layout_distance_medium"
+        android:contentDescription="@string/image"
+        android:src="@drawable/ic_counter" />
+
+    <TextView
+        android:layout_width="330dp"
+        android:layout_height="wrap_content"
+        android:autoLink="all"
+        android:linksClickable="true"
+        android:text="@string/credit_counter"
+        android:textColorLink="@color/colorAccent"
+        app:layout_gravity="center_vertical" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/layout_distance_medium"
+        android:layout_marginBottom="@dimen/layout_distance_medium"
+        android:contentDescription="@string/image"
+        android:src="@drawable/ic_check" />
+
+    <TextView
+        android:layout_width="330dp"
+        android:layout_height="wrap_content"
+        android:autoLink="all"
+        android:linksClickable="true"
+        android:text="@string/credit_check"
+        android:textColorLink="@color/colorAccent"
+        app:layout_gravity="center_vertical" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/layout_distance_medium"
+        android:layout_marginBottom="@dimen/layout_distance_medium"
+        android:contentDescription="@string/image"
+        android:src="@drawable/ic_cut" />
+
+    <TextView
+        android:layout_width="330dp"
+        android:layout_height="wrap_content"
+        android:autoLink="all"
+        android:linksClickable="true"
+        android:text="@string/credit_cut"
+        android:textColorLink="@color/colorAccent"
+        app:layout_gravity="center_vertical" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/layout_distance_medium"
+        android:layout_marginBottom="@dimen/layout_distance_medium"
+        android:contentDescription="@string/image"
+        android:src="@drawable/ic_info_light" />
+
+    <TextView
+        android:layout_width="330dp"
+        android:layout_height="wrap_content"
+        android:autoLink="all"
+        android:linksClickable="true"
+        android:text="@string/credit_info"
+        android:textColorLink="@color/colorAccent"
+        app:layout_gravity="center_vertical" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/layout_distance_medium"
+        android:layout_marginBottom="@dimen/layout_distance_medium"
+        android:contentDescription="@string/image"
+        android:src="@drawable/ic_compass" />
+
+    <TextView
+        android:layout_width="330dp"
+        android:layout_height="wrap_content"
+        android:autoLink="all"
+        android:linksClickable="true"
+        android:text="@string/credit_compass"
+        android:textColorLink="@color/colorAccent"
+        app:layout_gravity="center_vertical" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/layout_distance_medium"
+        android:layout_marginBottom="@dimen/layout_distance_medium"
+        android:contentDescription="@string/image"
+        android:src="@drawable/ic_open_book" />
+
+    <TextView
+        android:layout_width="330dp"
+        android:layout_height="wrap_content"
+        android:autoLink="all"
+        android:linksClickable="true"
+        android:text="@string/credit_book"
+        android:textColorLink="@color/colorAccent"
+        app:layout_gravity="center_vertical" />
+
+
+</android.support.v7.widget.GridLayout>

@@ -27,12 +27,15 @@ class MainActivity : AppCompatActivity() {
         initDrawer()
     }
 
+    private var selectedTab = R.id.navigation_images
+
     /**
      * Initializes the bottom bottom_navigation_bar_menu bar
      */
     private fun initBottomNavigationBar() {
         //Handles the click on the bottom_navigation_bar_menu bar
         bottom_navigation.setOnNavigationItemSelectedListener { item ->
+            selectedTab = item.itemId
             when (item.itemId) {
                 R.id.navigation_images -> {
                     replaceChildFragment(
@@ -73,9 +76,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
         //Clicks the first item on the bottom_navigation_bar_menu bar at the start of the app
-        bottom_navigation.selectedItemId = R.id.navigation_images
-
-
+        bottom_navigation.selectedItemId = selectedTab
     }
 
     private fun initDrawer() {
@@ -97,20 +98,6 @@ class MainActivity : AppCompatActivity() {
                     drawerLayout.closeDrawers()
                     true
                 }
-//                R.id.settings -> {
-//                    Toast.makeText(applicationContext, "Settings", Toast.LENGTH_LONG).show()
-//                    //val intent = Intent(this, AboutActivity::class.java)
-//                    //startActivity(intent)
-//                    drawerLayout.closeDrawers()
-//                    true
-//                }
-//                R.id.mycart -> {
-//                    Toast.makeText(applicationContext, "My Cart", Toast.LENGTH_LONG).show()
-//                    //val intent = Intent(this, AboutActivity::class.java)
-//                    //startActivity(intent)
-//                    drawerLayout.closeDrawers()
-//                    true
-//                }
                 else -> false
             }
         }
