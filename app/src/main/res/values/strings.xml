@@ -74,4 +74,5 @@
     <string name="credit_info" translatable="false">Icons made by https://www.flaticon.com/authors/freepik from https://www.flaticon.com</string>
     <string name="credit_compass" translatable="false">Icons made by https://www.flaticon.com/authors/google from https://www.flaticon.com</string>
     <string name="credit_book" translatable="false">Icons made by https://www.flaticon.com/authors/freepik from https://www.flaticon.com</string>
+    <string name="credits" translatable="false">All Place images are taken from the Subreddits https://www.reddit.com/r/place and https://www.reddit.com/r/thefinalclean. The data for the history is taken from https://www.reddit.com/r/redditdata/comments/6640ru/place_datasets_april_fools_2017/. The Place Atlas is courtesy of Roland Rytz https://draemm.li/various/place-atlas/about.html. The image of the heatmap of Place in the drawer is from https://www.reddit.com/user/lotsalote/ and can be found at https://imgur.com/a/PCiQu. Oh and this App is by me, Josua Frank https://www.reddit.com/user/Sharknoon</string>
 </resources>

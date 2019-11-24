@@ -61,6 +61,7 @@ class ListColorsFragment : Fragment() {
     }
 
     companion object {
+
         private val instances = mutableMapOf<Int, ListColorsFragment>()
         fun getInstance(colors: Map<PixelColor, Int>): ListColorsFragment {
             instances[colors.hashCode()]?.also { return it }
@@ -77,8 +78,7 @@ class ListColorsFragment : Fragment() {
 
             return listColorsFragment
         }
-//
-//        private fun getHash()
+
     }
 
     private fun bundleToMap(bundle: Bundle): MutableMap<PixelColor, Int> {

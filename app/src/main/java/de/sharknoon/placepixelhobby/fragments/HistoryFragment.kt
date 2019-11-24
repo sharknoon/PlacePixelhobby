@@ -28,6 +28,7 @@ class HistoryFragment : Fragment() {
     }
 
     private var photoView: PhotoView? = null
+    private var seekBar: SeekBar? = null
 
     private fun initPhotoView() {
         val a = requireActivity()
@@ -52,6 +53,7 @@ class HistoryFragment : Fragment() {
 
             override fun onStopTrackingTouch(seekBar: SeekBar?) = Unit
         })
+        this.seekBar = seekBar
     }
 
     private fun updatePhotoView(progress: Int) {
@@ -75,5 +77,13 @@ class HistoryFragment : Fragment() {
         fun getInstance() = self
     }
 
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putInt("history-progress", seekBar?.progress ?: 0)
+    }
 
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        seekBar?.progress = savedInstanceState?.getInt("history-progress") ?: 0
+    }
 }
