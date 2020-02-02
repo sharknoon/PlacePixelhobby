@@ -18,8 +18,8 @@ android {
         applicationId "de.sharknoon.placepixelhobby"
         minSdkVersion 24
         targetSdkVersion 28
-        versionCode 6
-        versionName '1.5'
+        versionCode 8
+        versionName '1.7'
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {

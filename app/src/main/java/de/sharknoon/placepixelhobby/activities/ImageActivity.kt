@@ -6,6 +6,9 @@ import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.support.v4.content.FileProvider
+import android.support.v4.content.pm.ShortcutInfoCompat
+import android.support.v4.content.pm.ShortcutManagerCompat
+import android.support.v4.graphics.drawable.IconCompat
 import android.support.v4.print.PrintHelper
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
@@ -31,7 +34,7 @@ class ImageActivity : AppCompatActivity() {
         super.onResume()
 
         initImage()
-        initTitle()
+        title = createTitle()
     }
 
     private fun initImage() {
@@ -46,12 +49,18 @@ class ImageActivity : AppCompatActivity() {
         photoView.maximumScale = 10F
     }
 
-    private fun initTitle() {
+    private fun createTitle(): String {
         val imageNo = intent.getIntExtra("imageNo", -1)
         val imageX = intent.getIntExtra("imageX", -1)
         val imageY = intent.getIntExtra("imageY", -1)
 
-        title = getString(R.string.image_no_d_x_y, imageNo, imageX, imageY)
+        return getString(R.string.image_no_d_x_y, imageNo, imageX, imageY)
+    }
+
+    private fun createShortTitle(): String {
+        val imageNo = intent.getIntExtra("imageNo", -1)
+
+        return getString(R.string.image_d, imageNo)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -79,6 +88,10 @@ class ImageActivity : AppCompatActivity() {
                 val id = applicationContext.resources
                     .getIdentifier(imageName, "drawable", applicationContext.packageName)
                 printImage(id, imageName)
+                true
+            }
+            R.id.button_image_activity_action_bar_menu_shortcut -> {
+                createShortcutOfPlate()
                 true
             }
             else -> super.onOptionsItemSelected(item)
@@ -137,8 +150,34 @@ class ImageActivity : AppCompatActivity() {
         bitmapPrinter.printBitmap("printing $drawableName", bitmap)
     }
 
+    private fun createShortcutOfPlate() {
+        val shortcutId = intent.getIntExtra("imageNo", -1).toString()
+        val imageName = intent.getStringExtra("imageName")
+        var imageId = applicationContext.resources
+            .getIdentifier(imageName, "drawable", applicationContext.packageName)
+        if (imageId == 0) imageId = R.drawable.ic_image
+        if (ShortcutManagerCompat.isRequestPinShortcutSupported(this)) {
+            val shortcutInfo = ShortcutInfoCompat.Builder(this, shortcutId)
+                .setIntent(
+                    Intent(
+                        this,
+                        ImageActivity::class.java
+                    ).setAction(Intent.ACTION_MAIN)
+                        .putExtras(intent)
+                ) // !!! intent's action must be set on oreo
+                .setShortLabel(createShortTitle())
+                .setIcon(IconCompat.createWithResource(this, imageId))
+                .build()
+            ShortcutManagerCompat.requestPinShortcut(this, shortcutInfo, null)
+        }
+    }
+
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        super.onCreateOptionsMenu(menu)
         menuInflater.inflate(R.menu.image_activity_action_bar_menu, menu)
+//        if (menu is MenuBuilder){
+//            menu.setOptionalIconsVisible(true)
+//        }
         return super.onCreateOptionsMenu(menu)
     }
 }

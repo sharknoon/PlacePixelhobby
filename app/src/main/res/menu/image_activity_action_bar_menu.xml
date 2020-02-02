@@ -2,18 +2,23 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/button_image_activity_action_bar_menu_print"
-        android:icon="@drawable/ic_print"
-        android:title=""
-        app:showAsAction="ifRoom" />
-    <item
         android:id="@+id/button_image_activity_action_bar_menu_share"
         android:icon="@drawable/ic_share"
-        android:title=""
+        android:title="@string/share"
         app:showAsAction="ifRoom" />
     <item
         android:id="@+id/button_image_activity_action_bar_menu_info"
         android:icon="@drawable/ic_info_dark"
-        android:title=""
-        app:showAsAction="always" />
+        android:title="@string/info"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/button_image_activity_action_bar_menu_print"
+        android:icon="@drawable/ic_print"
+        android:title="@string/print"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/button_image_activity_action_bar_menu_shortcut"
+        android:icon="@drawable/ic_shortcut"
+        android:title="@string/shortcut"
+        app:showAsAction="ifRoom" />
 </menu>

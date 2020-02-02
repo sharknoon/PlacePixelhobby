@@ -62,4 +62,8 @@
     <string name="original">Original</string>
     <string name="image">Image</string>
     <string name="sources">Sources</string>
+    <string name="print">Print</string>
+    <string name="share">Share</string>
+    <string name="shortcut">Shortcut</string>
+    <string name="image_d">Image %1$d</string>
 </resources>
