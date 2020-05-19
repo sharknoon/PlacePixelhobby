@@ -20,8 +20,8 @@
     <color name="placeYellow">#e5d900</color>
     <color name="placeLightGreen">#94e044</color>
     <color name="placeGreen">#02be01</color>
-    <color name="placeAquaBlue">#0083c7</color>
     <color name="placeGreenBlue">#00d3dd</color>
+    <color name="placeAquaBlue">#0083c7</color>
     <color name="placeBlue">#0000ea</color>
     <color name="placeViolet">#cf6ee4</color>
     <color name="placePurple">#820080</color>
@@ -37,8 +37,8 @@
     <color name="pixelhobbyYellow">#D6CD30</color>
     <color name="pixelhobbyLightGreen">#75A958</color>
     <color name="pixelhobbyGreen">#328529</color>
-    <color name="pixelhobbyAquaBlue">#459BC1</color>
     <color name="pixelhobbyGreenBlue">#00A99D</color>
+    <color name="pixelhobbyAquaBlue">#459BC1</color>
     <color name="pixelhobbyBlue">#005EAB</color>
     <color name="pixelhobbyViolet">#B285AF</color>
     <color name="pixelhobbyPurple">#97326B</color>
