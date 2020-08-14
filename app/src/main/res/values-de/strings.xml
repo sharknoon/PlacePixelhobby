@@ -66,4 +66,5 @@
     <string name="share">Teilen</string>
     <string name="shortcut">Verknüpfung</string>
     <string name="image_d">Bild %1$d</string>
+    <string name="grid">Raster</string>
 </resources>

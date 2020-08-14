@@ -23,7 +23,7 @@
             android:id="@+id/recycler_view_fragment_images_favorite_subimages"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layoutManager="android.support.v7.widget.GridLayoutManager"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
             app:spanCount="4" />
 
         <TextView
@@ -55,7 +55,7 @@
             android:id="@+id/recycler_view_fragment_images_all_subimages"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layoutManager="android.support.v7.widget.GridLayoutManager"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
             app:spanCount="4" />
 
     </LinearLayout>

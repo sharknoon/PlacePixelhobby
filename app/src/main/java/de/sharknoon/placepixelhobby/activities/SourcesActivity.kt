@@ -1,8 +1,8 @@
 package de.sharknoon.placepixelhobby.activities
 
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
 import android.view.MenuItem
+import androidx.appcompat.app.AppCompatActivity
 import de.sharknoon.placepixelhobby.R
 
 class SourcesActivity : AppCompatActivity() {

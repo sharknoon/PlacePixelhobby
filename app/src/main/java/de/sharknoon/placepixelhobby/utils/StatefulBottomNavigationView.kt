@@ -3,11 +3,12 @@ package de.sharknoon.placepixelhobby.utils
 import android.content.Context
 import android.os.Bundle
 import android.os.Parcelable
-import android.support.design.widget.BottomNavigationView
 import android.util.AttributeSet
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
 
-class StatefulBottomNavigationView : BottomNavigationView {
+class StatefulBottomNavigationView :
+    BottomNavigationView {
 
     private var mSelectedItemIdSavedState: Int? = null
 

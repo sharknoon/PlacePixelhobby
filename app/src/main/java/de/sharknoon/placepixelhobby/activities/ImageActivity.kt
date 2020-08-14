@@ -5,15 +5,15 @@ import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.os.Bundle
-import android.support.v4.content.FileProvider
-import android.support.v4.content.pm.ShortcutInfoCompat
-import android.support.v4.content.pm.ShortcutManagerCompat
-import android.support.v4.graphics.drawable.IconCompat
-import android.support.v4.print.PrintHelper
-import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.FileProvider
+import androidx.core.content.pm.ShortcutInfoCompat
+import androidx.core.content.pm.ShortcutManagerCompat
+import androidx.core.graphics.drawable.IconCompat
+import androidx.print.PrintHelper
 import com.github.chrisbanes.photoview.PhotoView
 import de.sharknoon.placepixelhobby.R
 import de.sharknoon.placepixelhobby.utils.AliasingDrawableWrapper
@@ -77,14 +77,14 @@ class ImageActivity : AppCompatActivity() {
                 true
             }
             R.id.button_image_activity_action_bar_menu_share -> {
-                val imageName = intent.getStringExtra("imageName")
+                val imageName = intent.getStringExtra("imageName") ?: ""
                 val id = applicationContext.resources
                     .getIdentifier(imageName, "drawable", applicationContext.packageName)
                 openShareMenu(imageName, id)
                 true
             }
             R.id.button_image_activity_action_bar_menu_print -> {
-                val imageName = intent.getStringExtra("imageName")
+                val imageName = intent.getStringExtra("imageName") ?: ""
                 val id = applicationContext.resources
                     .getIdentifier(imageName, "drawable", applicationContext.packageName)
                 printImage(id, imageName)

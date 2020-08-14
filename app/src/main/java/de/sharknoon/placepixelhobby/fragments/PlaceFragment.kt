@@ -1,13 +1,14 @@
 package de.sharknoon.placepixelhobby.fragments
 
-import android.arch.lifecycle.MutableLiveData
 import android.os.Bundle
-import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.RadioGroup
+import android.widget.Switch
 import android.widget.ToggleButton
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.MutableLiveData
 import com.github.chrisbanes.photoview.PhotoView
 import de.sharknoon.placepixelhobby.R
 import de.sharknoon.placepixelhobby.utils.AliasingDrawableWrapper
@@ -27,34 +28,63 @@ class PlaceFragment : Fragment() {
     override fun onResume() {
         super.onResume()
         initImage()
-        initRadioGroup()
+        initImageOptions()
     }
 
     enum class ImageType {
-        ORIGINAL, CLEAN
+        ORIGINAL, CLEAN, ORIGINAL_GRID, CLEAN_GRID;
+
+        fun withGrid(): ImageType = when {
+            this == CLEAN -> CLEAN_GRID
+            this == ORIGINAL -> ORIGINAL_GRID
+            else -> this
+        }
+
+        fun withoutGrid(): ImageType = when {
+            this == CLEAN_GRID -> CLEAN
+            this == ORIGINAL_GRID -> ORIGINAL
+            else -> this
+        }
+
+        fun toClean(): ImageType = when {
+            this == ORIGINAL_GRID -> CLEAN_GRID
+            this == ORIGINAL -> CLEAN
+            else -> this
+        }
+
+        fun toOriginal(): ImageType = when {
+            this == CLEAN_GRID -> ORIGINAL_GRID
+            this == CLEAN -> ORIGINAL
+            else -> this
+        }
     }
 
-    private var selectedImageType = MutableLiveData<ImageType>()
+    private val selectedImageType = MutableLiveData<ImageType>()
 
     private fun initImage() {
-        selectedImageType.observeForever {
-            val imageType = it ?: return@observeForever
-            val a = requireActivity()
-            val photoView = a.findViewById<PhotoView>(R.id.photo_view_fragment_final_clean)
-            val imageId = when (imageType) {
-                ImageType.ORIGINAL -> R.drawable.ic_place_99
-                ImageType.CLEAN -> R.drawable.ic_final_clean
-            }
+        val a = requireActivity()
+        val photoViewPlace = a.findViewById<PhotoView>(R.id.photo_view_fragment_place_image)
+        val observer = { imageId: Int ->
             val drawable = a.resources.getDrawable(imageId, a.theme)
             val aliasingDrawableWrapper = AliasingDrawableWrapper(drawable)
-            photoView.setImageDrawableKeepZoom(aliasingDrawableWrapper)
-            photoView.maximumScale = 50F
+            photoViewPlace.setImageDrawableKeepZoom(aliasingDrawableWrapper)
+            photoViewPlace.maximumScale = 50F
         }
+        val imageTypeObserver = { imageType: ImageType? ->
+            val imageId = when (imageType ?: ImageType.ORIGINAL) {
+                ImageType.ORIGINAL -> R.drawable.ic_place_99
+                ImageType.ORIGINAL_GRID -> R.drawable.ic_place_original_grid
+                ImageType.CLEAN -> R.drawable.ic_final_clean
+                ImageType.CLEAN_GRID -> R.drawable.ic_place_cleaned_grid
+            }
+            observer(imageId)
+        }
+        selectedImageType.observeForever(imageTypeObserver)
 
         selectedImageType.value = ImageType.ORIGINAL
     }
 
-    private fun initRadioGroup() {
+    private fun initImageOptions() {
         val a = requireActivity()
 
         val radioGroup = a.findViewById<RadioGroup>(R.id.radio_group_fragment_place)
@@ -63,11 +93,10 @@ class PlaceFragment : Fragment() {
                 val view = radioGroup.getChildAt(j) as ToggleButton
                 view.isChecked = view.id == checkedId
             }
-            when (checkedId) {
-                R.id.toggle_button_fragment_place_original ->
-                    selectedImageType.value = ImageType.ORIGINAL
-                R.id.toggle_button_fragment_place_clean ->
-                    selectedImageType.value = ImageType.CLEAN
+            if (checkedId == R.id.toggle_button_fragment_place_original) {
+                selectedImageType.value = selectedImageType.value?.toOriginal()
+            } else {
+                selectedImageType.value = selectedImageType.value?.toClean()
             }
         }
 
@@ -82,6 +111,20 @@ class PlaceFragment : Fragment() {
         toggleButtonClean.setOnClickListener(listener)
 
         toggle_button_fragment_place_original.performClick()
+
+        // Switch settings
+        val switchGrid = a.findViewById<Switch>(R.id.switch_fragment_place_grid)
+        switchGrid.setOnCheckedChangeListener { _, isChecked ->
+            if (isChecked) {
+                selectedImageType.value = selectedImageType.value?.withGrid()
+            } else {
+                selectedImageType.value = selectedImageType.value?.withoutGrid()
+            }
+        }
+
+        switchGrid.isChecked = false
+
+
     }
 
     companion object {

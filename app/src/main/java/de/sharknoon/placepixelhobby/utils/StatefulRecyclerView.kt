@@ -4,8 +4,8 @@ package de.sharknoon.placepixelhobby.utils
 import android.content.Context
 import android.os.Bundle
 import android.os.Parcelable
-import android.support.v7.widget.RecyclerView
 import android.util.AttributeSet
+import androidx.recyclerview.widget.RecyclerView
 
 /**
  * Class [StatefulRecyclerView] extends [RecyclerView] and adds position management on configuration changes.

@@ -1,11 +1,11 @@
 package de.sharknoon.placepixelhobby.fragments
 
 import android.os.Bundle
-import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.SeekBar
+import androidx.fragment.app.Fragment
 import com.github.chrisbanes.photoview.PhotoView
 import de.sharknoon.placepixelhobby.R
 import de.sharknoon.placepixelhobby.utils.AliasingDrawableWrapper
