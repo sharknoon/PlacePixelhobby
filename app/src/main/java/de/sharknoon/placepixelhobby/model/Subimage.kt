@@ -2,6 +2,7 @@ package de.sharknoon.placepixelhobby.model
 
 import android.content.Context
 import android.graphics.drawable.Drawable
+import androidx.core.content.res.ResourcesCompat
 import de.sharknoon.placepixelhobby.utils.AliasingDrawableWrapper
 
 
@@ -22,7 +23,7 @@ class Subimage private constructor(
             //Checking the cache
             IMAGE_CACHE[id]?.also { return it }
             //Getting the drawable, displayName and properties of the subimage
-            val drawable = context.resources.getDrawable(id, context.theme)
+            val drawable = ResourcesCompat.getDrawable(context.resources, id, context.theme)
                 ?: throw IllegalArgumentException("Drawable ID $id not found!")
             val name = context.resources.getResourceEntryName(id)
             val subNames = name.split('_')
@@ -30,9 +31,9 @@ class Subimage private constructor(
                 AliasingDrawableWrapper(drawable),
                 id,
                 name,
-                subNames[1].toInt(),
-                subNames[2].toInt(),
-                subNames[3].toInt()
+                subNames[1].toIntOrNull() ?: -1,
+                subNames[2].toIntOrNull() ?: -1,
+                subNames[3].toIntOrNull() ?: -1
             )
             IMAGE_CACHE[id] = subimage
             return subimage

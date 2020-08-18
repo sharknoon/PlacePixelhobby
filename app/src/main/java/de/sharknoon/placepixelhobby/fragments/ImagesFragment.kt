@@ -145,7 +145,9 @@ class ImagesFragment : Fragment() {
             .all
             .keys
             .stream()
-            .map { Subimage.fromID(requireContext(), it.toIntOrNull() ?: -1) }
+            .map { it.toIntOrNull() }
+            .filter { it != null }
+            .map { Subimage.fromID(requireContext(), it ?: -1) }
             .peek { it.favorite = true }
             .sorted { s1, s2 -> s1.number.compareTo(s2.number) }
             .collect(Collectors.toList())
